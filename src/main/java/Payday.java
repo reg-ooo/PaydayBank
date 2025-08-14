@@ -4,19 +4,22 @@ public class Payday {
     static String db,uname,pswd;
     static Connection con;
     static Statement st;
+    static ResultSet rs;
     public static void main(String[] args) {
 //        new LaunchPage();
         DBConnect();
+        new LaunchPage();
+
     }
     
     public static void DBConnect(){
         db = "banksystem";
         uname = "root";
-        pswd = "Rego061800@#";
+        pswd = "regorego2006";
 
         try{
             Class.forName("com.mysql.cj.jdbc.Driver");
-            String url = "jdbc:mysql://127.0.0.1:3307/?serverTimezone=UTC";
+            String url = "jdbc:mysql://127.0.0.1:3307/" + db + "?serverTimezone=UTC";
             con = DriverManager.getConnection(url, uname, pswd);
             st = con.createStatement();
 

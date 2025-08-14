@@ -1,15 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
-    <data-source source="LOCAL" name="PaydayMySQL" uuid="d516de53-806a-45c9-82be-50a4f38da835">
-      <driver-ref>java.sql.Driver</driver-ref>
-      <synchronize>true</synchronize>
-      <configured-by-url>true</configured-by-url>
-      <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>
-      <jdbc-url>jdbc:mysql://127.0.0.1:3307/?serverTimezone=UTC</jdbc-url>
-      <working-dir>$ProjectFileDir$</working-dir>
-    </data-source>
-    <data-source source="LOCAL" name="User Data Source" uuid="4923e0a1-cec4-4ea9-acf6-9dfb1a635130">
+    <data-source source="LOCAL" name="PaydayMySQL" uuid="4923e0a1-cec4-4ea9-acf6-9dfb1a635130">
       <driver-ref>18e7189e-cb22-4091-8fc0-131ae6daed93</driver-ref>
       <synchronize>true</synchronize>
       <configured-by-url>true</configured-by-url>
