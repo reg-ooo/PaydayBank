@@ -6,9 +6,9 @@ public class Payday {
     static Statement st;
     static ResultSet rs;
     public static void main(String[] args) {
-//        new LaunchPage();
-        DBConnect();
         new LaunchPage();
+        DBConnect();
+//        new LoginPage();
 
     }
     
@@ -19,7 +19,7 @@ public class Payday {
 
         try{
             Class.forName("com.mysql.cj.jdbc.Driver");
-            String url = "jdbc:mysql://127.0.0.1:3307/" + db + "?serverTimezone=UTC";
+            String url = "jdbc:mysql://127.0.0.1:3308/" + db + "?serverTimezone=UTC";
             con = DriverManager.getConnection(url, uname, pswd);
             st = con.createStatement();
 

@@ -5,6 +5,7 @@ public class Users extends Payday{
         try {
             st.executeUpdate(query);
             System.out.println("User added successfully!");
+            new LaunchPage();
         } catch (Exception e) {
             System.out.println("Adding user failed: " + e.getMessage());
         }
@@ -16,6 +17,7 @@ public class Users extends Payday{
             rs = st.executeQuery(query);
             if(rs.next()){
                 System.out.println("Login successful!");
+                new LaunchPage();
             }
             else{
                 System.out.println("Login failed!");

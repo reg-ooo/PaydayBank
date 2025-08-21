@@ -2,7 +2,7 @@
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
     <data-source source="LOCAL" name="PaydayMySQL" uuid="4923e0a1-cec4-4ea9-acf6-9dfb1a635130">
-      <driver-ref>18e7189e-cb22-4091-8fc0-131ae6daed93</driver-ref>
+      <driver-ref>mysql</driver-ref>
       <synchronize>true</synchronize>
       <configured-by-url>true</configured-by-url>
       <jdbc-driver>com.mysql.jdbc.Driver</jdbc-driver>
