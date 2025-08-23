@@ -94,7 +94,7 @@ public class LaunchPage extends JFrame{
 
         JPanel transactionPanel = new JPanel();
         transactionPanel.setLayout(new BorderLayout());
-        transactionPanel.setPreferredSize(new Dimension(360, 40));
+        transactionPanel.setPreferredSize(new Dimension(360, 45));
         transactionPanel.setBorder(BorderFactory.createEmptyBorder(20, 0, 0, 0));
 
         JLabel transactionLabel = new JLabel("Transaction History");
