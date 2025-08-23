@@ -1,3 +1,4 @@
+import javax.swing.*;
 import java.sql.*;
 
 public class Payday {
@@ -5,21 +6,33 @@ public class Payday {
     static Connection con;
     static Statement st;
     static ResultSet rs;
+
     public static void main(String[] args) {
-        new LaunchPage();
+
+        //Initalize SplashScreen before launch page
+        SplashScreen splash = new SplashScreen();
+        splash.showSplash(3);
+
+        //RUNS LAUNCH PAGE AFTER INITIALIZATION
+        SwingUtilities.invokeLater(new Runnable() {
+            public void run() {
+                new LaunchPage();
+            }
+        });
+
         DBConnect();
 //        new LoginPage();
 
     }
     
     public static void DBConnect(){
-        db = "banksystem";
+        db = "payday_database";
         uname = "root";
-        pswd = "regorego2006";
+        pswd = "root";
 
         try{
             Class.forName("com.mysql.cj.jdbc.Driver");
-            String url = "jdbc:mysql://127.0.0.1:3308/" + db + "?serverTimezone=UTC";
+            String url = "jdbc:mysql://127.0.0.1:3306/" + db + "?serverTimezone=UTC";
             con = DriverManager.getConnection(url, uname, pswd);
             st = con.createStatement();
 

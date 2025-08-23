@@ -5,11 +5,27 @@ import java.awt.geom.RoundRectangle2D;
 public class RoundedPanel extends JPanel {
     private int cornerRadius;
     private Color backgroundColor;
+    private Dimension preferredSize;
 
     public RoundedPanel(int cornerRadius, Color backgroundColor) {
         this.cornerRadius = cornerRadius;
         this.backgroundColor = backgroundColor;
-        setOpaque(false); // Make the panel transparent so we can draw custom shape
+        setOpaque(false);
+        super.setBackground(backgroundColor);
+        this.preferredSize = new Dimension(420, 750);
+    }
+
+    @Override
+    public void setBackground(Color bg) {
+        this.backgroundColor = bg;
+        super.setBackground(bg); // This ensures proper component background
+        repaint(); // Trigger redraw with new color
+    }
+
+    @Override
+    public void setPreferredSize(Dimension d) {
+        this.preferredSize = d;
+        super.setPreferredSize(d);
     }
 
     @Override
