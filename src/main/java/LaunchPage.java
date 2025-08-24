@@ -9,10 +9,8 @@ public class LaunchPage extends JFrame{
     String pesoSymbol = "\u20B1";
     ColorPalette color = new ColorPalette();
 
-    // Images
     ImageIcon appLogo = new ImageIcon("appLogo.png");
 
-    //Buttons
     RoundedPanel payBillsBtn = new RoundedPanel(15, color.pBlue);
     RoundedPanel cashInBtn = new RoundedPanel(15, color.pBlue);
     RoundedPanel cashOutBtn = new RoundedPanel(15, color.pBlue);
@@ -29,7 +27,6 @@ public class LaunchPage extends JFrame{
         mainFrame.setResizable(false);
         mainFrame.setLayout(new BorderLayout());
 
-        // Top white panel containing balance and buttons
         JPanel topWhitePanel = new JPanel();
         topWhitePanel.setLayout(new BorderLayout());
         topWhitePanel.setBackground(Color.WHITE);
@@ -88,7 +85,6 @@ public class LaunchPage extends JFrame{
         buttonPanel.setPreferredSize(new Dimension(360, 140));
         buttonPanel.setOpaque(false);
 
-        //Style Buttons
         styleButton(payBillsBtn, "Pay Bills");
         styleButton(cashInBtn, "Cash In");
         styleButton(cashOutBtn, "Cash Out");
@@ -96,23 +92,21 @@ public class LaunchPage extends JFrame{
         styleButton(bankTransferBtn, "Bank Transfer");
         styleButton(buyCryptoBtn, "Buy Crypto");
 
-        //ADD BUTTONS
         addAllButtons(buttonPanel);
         buttonsPanelContainer.add(buttonPanel);
 
         topWhitePanel.add(nPanel, BorderLayout.NORTH);
         topWhitePanel.add(buttonsPanelContainer, BorderLayout.CENTER);
 
-        // Bottom panel with custom blue color for transaction history
         JPanel bottomGrayPanel = new JPanel();
         bottomGrayPanel.setLayout(new BorderLayout());
-        bottomGrayPanel.setBackground(new Color(230, 240, 250)); // #E6F0FA
+        bottomGrayPanel.setBackground(new Color(230, 240, 250));
 
         JPanel transactionPanel = new JPanel();
         transactionPanel.setLayout(new BorderLayout());
         transactionPanel.setPreferredSize(new Dimension(360, 45));
         transactionPanel.setBorder(BorderFactory.createEmptyBorder(20, 30, 0, 30));
-        transactionPanel.setBackground(new Color(230, 240, 250)); // #E6F0FA
+        transactionPanel.setBackground(new Color(230, 240, 250));
 
         JLabel transactionLabel = new JLabel("Transaction History");
         transactionLabel.setFont(loadFont(Font.BOLD, 18f));
@@ -126,20 +120,17 @@ public class LaunchPage extends JFrame{
         transactionPanel.add(transactionLabel, BorderLayout.WEST);
         transactionPanel.add(seeAllLabel, BorderLayout.EAST);
 
-        // Spacer panel to fill remaining space
         JPanel spacerPanel = new JPanel();
-        spacerPanel.setBackground(new Color(230, 240, 250)); // #E6F0FA
+        spacerPanel.setBackground(new Color(230, 240, 250));
 
         bottomGrayPanel.add(transactionPanel, BorderLayout.NORTH);
         bottomGrayPanel.add(spacerPanel, BorderLayout.CENTER);
 
-        // Navigation bar at the bottom
         JPanel navBarPanel = new JPanel();
         navBarPanel.setLayout(new GridLayout(1, 4));
         navBarPanel.setPreferredSize(new Dimension(420, 70));
-        navBarPanel.setBackground(new Color(52, 88, 130)); // Dark blue color
+        navBarPanel.setBackground(new Color(52, 88, 130));
 
-        // Create navigation buttons
         JPanel homeBtn = createNavButton("🏠", "Home", true);
         JPanel profileBtn = createNavButton("👤", "Profile", false);
         JPanel walletBtn = createNavButton("💳", "Wallet", false);
@@ -173,14 +164,12 @@ public class LaunchPage extends JFrame{
         textLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
         textLabel.setForeground(isActive ? Color.WHITE : new Color(150, 150, 150));
 
-        // Add some spacing between icon and text
         navButton.add(Box.createVerticalGlue());
         navButton.add(iconLabel);
         navButton.add(Box.createRigidArea(new Dimension(0, 2)));
         navButton.add(textLabel);
         navButton.add(Box.createVerticalGlue());
 
-        // Add hover effect
         navButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 if (!isActive) {
