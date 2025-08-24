@@ -1,7 +1,7 @@
 public class Users extends Payday{
 
     public void addUser(String username, String password){
-        String query = String.format("INSERT INTO users(username, password) VALUES (\"%s\", \"%s\")", username, password);
+        String query = String.format("INSERT INTO user(username, password) VALUES (\"%s\", \"%s\")", username, password);
         try {
             st.executeUpdate(query);
             System.out.println("User added successfully!");
@@ -12,7 +12,7 @@ public class Users extends Payday{
     }
 
     public void loginAccount (String username, String password){
-        String query = String.format("SELECT * FROM users WHERE username = \"%s\" AND password = \"%s\"", username, password);
+        String query = String.format("SELECT * FROM user WHERE username = \"%s\" AND password = \"%s\"", username, password);
         try{
             rs = st.executeQuery(query);
             if(rs.next()){

@@ -9,6 +9,8 @@ public class Payday {
 
     public static void main(String[] args) {
 
+
+
         //Initalize SplashScreen before launch page
         SplashScreen splash = new SplashScreen();
         splash.showSplash(3);
@@ -26,13 +28,13 @@ public class Payday {
     }
     
     public static void DBConnect(){
-        db = "payday_database";
-        uname = "root";
-        pswd = "root";
+        db = "banksystem";
+        uname = "admin";
+        pswd = "]#KCzK9[MeePV8<6YN~o2YOj48dT";
 
         try{
             Class.forName("com.mysql.cj.jdbc.Driver");
-            String url = "jdbc:mysql://127.0.0.1:3306/" + db + "?serverTimezone=UTC";
+            String url = "jdbc:mysql://paydaybank.cluster-chqoc26c4kyy.ap-southeast-1.rds.amazonaws.com:3306/" + db + "?serverTimezone=UTC";
             con = DriverManager.getConnection(url, uname, pswd);
             st = con.createStatement();
 
