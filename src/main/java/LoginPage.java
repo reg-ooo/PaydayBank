@@ -44,6 +44,9 @@ public class LoginPage extends JFrame{
         userPanel.add(passField);
         userPanel.add(registerButton);
         userPanel.add(loginButton);
+        this.add(userPanel);
+        this.setVisible(true);
+        this.setSize(420, 300);
         launchP.mainFrame.add(userPanel, BorderLayout.CENTER);
     }
 }

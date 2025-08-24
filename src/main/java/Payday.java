@@ -9,6 +9,8 @@ public class Payday {
 
     public static void main(String[] args) {
 
+
+
         //Initalize SplashScreen before launch page
         SplashScreen splash = new SplashScreen();
         splash.showSplash(3);
