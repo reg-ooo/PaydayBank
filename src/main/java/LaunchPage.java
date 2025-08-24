@@ -10,15 +10,22 @@ public class LaunchPage extends JFrame{
     ColorPalette color = new ColorPalette();
 
     // Images
-    ImageIcon appLogo = new ImageIcon("appLogo.png");
+    private ImageIcon bankTransferImg, buyCryptoImg, cashInImg, cashOutImg,
+    requestMoneyImg, sendMoneyImg;
+
+    private ImageIcon appLogo = new ImageIcon("appLogo.png");
+
+    //WRAPPER BUTTONS
+    private JPanel payBillsWrapper, cashInWrapper, cashOutWrapper, requestMoneyWrapper,
+    bankTransferWrapper, buyCryptoWrapper;
 
     //Buttons
-    RoundedPanel payBillsBtn = new RoundedPanel(15, color.pBlue);
-    RoundedPanel cashInBtn = new RoundedPanel(15, color.pBlue);
-    RoundedPanel cashOutBtn = new RoundedPanel(15, color.pBlue);
-    RoundedPanel requestMoneyBtn = new RoundedPanel(15, color.pBlue);
-    RoundedPanel bankTransferBtn = new RoundedPanel(15, color.pBlue);
-    RoundedPanel buyCryptoBtn = new RoundedPanel(15, color.pBlue);
+    private RoundedPanel payBillsBtn = new RoundedPanel(25, color.dBlue);
+    private RoundedPanel cashInBtn = new RoundedPanel(25, color.dBlue);
+    private RoundedPanel cashOutBtn = new RoundedPanel(25, color.dBlue);
+    private RoundedPanel requestMoneyBtn = new RoundedPanel(25, color.dBlue);
+    private RoundedPanel bankTransferBtn = new RoundedPanel(25, color.dBlue);
+    private RoundedPanel buyCryptoBtn = new RoundedPanel(25, color.dBlue);
 
     public LaunchPage(){
         mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -41,7 +48,7 @@ public class LaunchPage extends JFrame{
         nPanel.setLayout(new FlowLayout());
         nPanel.setPreferredSize(new Dimension(360, 120));
 
-        RoundedPanel balPanel = new RoundedPanel(15, color.pBlue);
+        RoundedPanel balPanel = new RoundedPanel(15, color.dBlue);
         balPanel.setLayout(new BorderLayout());
         balPanel.setPreferredSize(new Dimension(360, 80));
 
@@ -75,23 +82,32 @@ public class LaunchPage extends JFrame{
         centerPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 10));
         centerPanel.setPreferredSize(new Dimension(420, 180));
 
+
+        //BUTTON PANELS
         JPanel buttonPanel = new JPanel();
-        buttonPanel.setLayout(new GridLayout(2, 3, 25, 25));
-        buttonPanel.setPreferredSize(new Dimension(360, 140));
+        buttonPanel.setLayout(new GridLayout(2, 3, 25, 15));
 
+        //RESIZE BUTTON IMAGES
+        sendMoneyImg = resizeImage("sendMoney.png");
+        cashInImg = resizeImage("cashIn.png");
+        cashOutImg = resizeImage("cashOut.png");
+        requestMoneyImg = resizeImage("requestMoney.png");
+        bankTransferImg = resizeImage("bankTransfer.png");
+        buyCryptoImg = resizeImage("buyCrypto.png");
 
-        //Style Buttons (ANG STYLE METHOD GINA COPY AND PASTE YUNG SAME BUTTON DESIGN)
-        styleButton(payBillsBtn, "Pay Bills");
-        styleButton(cashInBtn, "Cash In");
-        styleButton(cashOutBtn, "Cash Out");
-        styleButton(requestMoneyBtn, "Request Money");
-        styleButton(bankTransferBtn, "Bank Transfer");
-        styleButton(buyCryptoBtn, "Buy Crypto");
+        //Style Buttons WITH WRAPPER (ANG STYLE METHOD GINA COPY AND PASTE YUNG SAME BUTTON DESIGN)
+        payBillsWrapper = styleButton(payBillsBtn, "Pay Bills", sendMoneyImg);
+        cashInWrapper = styleButton(cashInBtn, "Cash In", cashInImg);
+        cashOutWrapper = styleButton(cashOutBtn, "Cash Out", cashOutImg);
+        requestMoneyWrapper = styleButton(requestMoneyBtn, "Request Money", requestMoneyImg);
+        bankTransferWrapper = styleButton(bankTransferBtn, "Bank Transfer", bankTransferImg);
+        buyCryptoWrapper = styleButton(buyCryptoBtn, "Buy Crypto", buyCryptoImg);
 
         //ADD BUTTONS
         addAllButtons(buttonPanel);
         centerPanel.add(buttonPanel);
 
+        //TRANSACTION PANEL
         JPanel transactionPanel = new JPanel();
         transactionPanel.setLayout(new BorderLayout());
         transactionPanel.setPreferredSize(new Dimension(360, 40));
@@ -100,6 +116,36 @@ public class LaunchPage extends JFrame{
         JLabel transactionLabel = new JLabel("Transaction History");
         transactionLabel.setFont(loadFont(Font.BOLD, 18f));
         transactionLabel.setForeground(color.dBlue);
+
+        // Spacer panel to fill remaining space
+        JPanel spacerPanel = new JPanel();
+        spacerPanel.setBackground(new Color(230, 240, 250)); // #E6F0FA
+
+        // Bottom panel with custom blue color for transaction history
+        JPanel bottomGrayPanel = new JPanel();
+        bottomGrayPanel.setLayout(new BorderLayout());
+        bottomGrayPanel.setBackground(new Color(230, 240, 250));
+        bottomGrayPanel.add(transactionPanel, BorderLayout.NORTH);
+        bottomGrayPanel.add(spacerPanel, BorderLayout.CENTER);
+
+        // Navigation bar at the bottom
+        JPanel navBarPanel = new JPanel();
+        navBarPanel.setLayout(new GridLayout(1, 4));
+        navBarPanel.setPreferredSize(new Dimension(420, 70));
+        navBarPanel.setForeground(color.dBlue);
+
+        // Create navigation buttons
+        JPanel homeBtn = createNavButton("🏠", "Home", true);
+        JPanel profileBtn = createNavButton("👤", "Profile", false);
+        JPanel walletBtn = createNavButton("💳", "Wallet", false);
+        JPanel notificationBtn = createNavButton("🔔", "Notifications", false);
+
+        //ADD BUTTONS TO NAV BAR
+        navBarPanel.add(homeBtn);
+        navBarPanel.add(profileBtn);
+        navBarPanel.add(walletBtn);
+        navBarPanel.add(notificationBtn);
+
 
         JLabel seeAllLabel = new JLabel("See all");
         seeAllLabel.setFont(loadFont(Font.PLAIN, 14f));
@@ -113,6 +159,7 @@ public class LaunchPage extends JFrame{
 
         mainFrame.add(nPanel, BorderLayout.NORTH);
         mainFrame.add(centerPanel, BorderLayout.CENTER);
+        mainFrame.add(navBarPanel, BorderLayout.SOUTH);
         mainFrame.setVisible(true);
     }
 
@@ -128,41 +175,113 @@ public class LaunchPage extends JFrame{
         }
     }
 
-    private void addHoverEffect() {
+    private JPanel createNavButton(String icon, String text, boolean isActive) {
+        JPanel navButton = new JPanel();
+        navButton.setLayout(new BoxLayout(navButton, BoxLayout.Y_AXIS));
+        navButton.setBackground(color.dBlue);
+        navButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        navButton.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
 
+        JLabel iconLabel = new JLabel(icon);
+        iconLabel.setFont(new Font("Segoe UI Emoji", Font.PLAIN, 20));
+        iconLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        iconLabel.setForeground(isActive ? Color.WHITE : new Color(150, 150, 150));
+
+        JLabel textLabel = new JLabel(text);
+        textLabel.setFont(loadFont(Font.PLAIN, 10f));
+        textLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        textLabel.setForeground(isActive ? Color.WHITE : new Color(150, 150, 150));
+
+        // Add some spacing between icon and text
+        navButton.add(Box.createVerticalGlue());
+        navButton.add(iconLabel);
+        navButton.add(Box.createRigidArea(new Dimension(0, 2)));
+        navButton.add(textLabel);
+        navButton.add(Box.createVerticalGlue());
+
+        // Add hover effect
+        navButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                if (!isActive) {
+                    iconLabel.setForeground(Color.WHITE);
+                    textLabel.setForeground(Color.WHITE);
+                }
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                if (!isActive) {
+                    iconLabel.setForeground(new Color(150, 150, 150));
+                    textLabel.setForeground(new Color(150, 150, 150));
+                }
+            }
+        });
+
+        return navButton;
+    }
+
+    private ImageIcon resizeImage(String text) {
+        //RESIZE IMAGE
+        ImageIcon rawImage = new ImageIcon(text);
+        Image originalImage = rawImage.getImage();
+        Image resizedimage = originalImage.getScaledInstance(60, 60, Image.SCALE_SMOOTH);
+        ImageIcon buttonImage = new ImageIcon(resizedimage);
+
+        return buttonImage;
     }
 
     private void addAllButtons(JPanel buttonPanel) {
-        buttonPanel.add(payBillsBtn);
-        buttonPanel.add(cashInBtn);
-        buttonPanel.add(cashOutBtn);
-        buttonPanel.add(requestMoneyBtn);
-        buttonPanel.add(bankTransferBtn);
-        buttonPanel.add(buyCryptoBtn);
+        buttonPanel.add(payBillsWrapper);
+        buttonPanel.add(cashInWrapper);
+        buttonPanel.add(cashOutWrapper);
+        buttonPanel.add(requestMoneyWrapper);
+        buttonPanel.add(bankTransferWrapper);
+        buttonPanel.add(buyCryptoWrapper);
     }
 
-    private void styleButton(RoundedPanel button, String text) {
-        button.setPreferredSize(new Dimension(10, 30));
+    private JPanel styleButton(RoundedPanel button, String text, ImageIcon image) {
+        //WRAPPER PANEL
+        JPanel wrapperPanel = new JPanel();
+        wrapperPanel.setLayout(new BorderLayout());
+        wrapperPanel.setOpaque(false);
+        wrapperPanel.setPreferredSize(new Dimension(95, 90));
+
+        //BUTTON
+        button.setPreferredSize(new Dimension(50, 70));
         button.setCursor(new Cursor(Cursor.HAND_CURSOR));
         button.setLayout(new BorderLayout());
 
-        JLabel buttonLabel = new JLabel(text);
-        buttonLabel.setFont(loadFont(Font.PLAIN, 12f));
-        buttonLabel.setForeground(color.white);
-        buttonLabel.setHorizontalAlignment(JLabel.CENTER);
+        //IMAGE LABEL
+        JLabel imageLabel = new JLabel(image);
+        imageLabel.setIcon(image);
+        imageLabel.setHorizontalAlignment(JLabel.CENTER);
+        imageLabel.setForeground(color.gray);
 
-        button.add(buttonLabel, BorderLayout.CENTER);
+        //TEXT LABEL
+        JLabel buttonLabel = new JLabel(text);
+        buttonLabel.setFont(loadFont(Font.BOLD, 12f));
+        buttonLabel.setForeground(color.dBlue);
+        buttonLabel.setHorizontalAlignment(JLabel.CENTER);
+        buttonLabel.setBorder(BorderFactory.createEmptyBorder(5, 0, 0, 0));
+        button.add(imageLabel, BorderLayout.CENTER);
 
         button.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                button.setBackground(color.dBlue);
+                button.setBackground(color.pBlue);
+                imageLabel.setForeground(color.white);
+
                 button.repaint();
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                button.setBackground(color.pBlue);
+                button.setBackground(color.dBlue);
+                imageLabel.setForeground(color.gray);
+
                 button.repaint();
             }
         });
+
+        wrapperPanel.add(button, BorderLayout.NORTH);
+        wrapperPanel.add(buttonLabel, BorderLayout.CENTER);
+
+        return wrapperPanel;
     }
 
 }

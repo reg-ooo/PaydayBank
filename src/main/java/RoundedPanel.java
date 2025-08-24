@@ -29,6 +29,11 @@ public class RoundedPanel extends JPanel {
     }
 
     @Override
+    public Dimension getPreferredSize() {
+        return preferredSize;
+    }
+
+    @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
         Graphics2D g2d = (Graphics2D) g.create();

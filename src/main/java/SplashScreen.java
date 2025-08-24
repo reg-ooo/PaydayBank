@@ -60,7 +60,7 @@ public class SplashScreen extends JWindow{
 
     private ImageIcon resizeImage(ImageIcon image) {
         //RESIZE IMAGE
-        Image originalImage = originalLogo.getImage();
+        Image originalImage = image.getImage();
         Image resizedimage = originalImage.getScaledInstance(400, 400, Image.SCALE_SMOOTH);
         ImageIcon appLogo = new ImageIcon(resizedimage);
 
