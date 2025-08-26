@@ -49,14 +49,14 @@ public class LaunchPage extends JFrame{
         JLabel pesoSign = new JLabel(pesoSymbol);
         JLabel amountText = new JLabel(String.format( "%s 15,000", pesoSymbol));
 
-        //NORTH PANEL
+        //PALDO KA LODS
         nPanel.setLayout(new FlowLayout());
-        nPanel.setPreferredSize(new Dimension(360, 120));
+        nPanel.setPreferredSize(new Dimension(360, 150));
 
         //BALANCE PANEL
         RoundedPanel balPanel = new RoundedPanel(15, style.pBlue);
         balPanel.setLayout(new BorderLayout());
-        balPanel.setPreferredSize(new Dimension(360, 80));
+        balPanel.setPreferredSize(new Dimension(360, 110));
 
         //BALANCE TEXT
         balanceText.setFont(new Font("Open Sans", Font.BOLD, 12));
@@ -69,7 +69,7 @@ public class LaunchPage extends JFrame{
         upperBalancePanel.setPreferredSize(new Dimension(360, 30));
 
         //BALANCE AMOUNT
-        amountText.setFont(loadFont(Font.PLAIN, 35f));
+        amountText.setFont(loadFont(Font.PLAIN, 40f));
         amountText.setVerticalTextPosition(JLabel.CENTER);
         amountText.setForeground(style.white);
 
@@ -89,18 +89,14 @@ public class LaunchPage extends JFrame{
         nPanel.add(headerPanel);
         nPanel.add(balPanel);
 
-        //CENTER PANEL
         JPanel centerPanel = new JPanel();
         centerPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 15));
         centerPanel.setPreferredSize(new Dimension(420, 200));
         centerPanel.setMaximumSize(new Dimension(420, 230));
 
-
-        //BUTTON PANELS
         JPanel buttonPanel = new JPanel();
         buttonPanel.setLayout(new GridLayout(2, 3, 25, 10));
 
-        //RESIZE BUTTON IMAGES
         sendMoneyImg = resizeImage("sendMoney.png");
         cashInImg = resizeImage("cashIn.png");
         cashOutImg = resizeImage("cashOut.png");
@@ -120,11 +116,22 @@ public class LaunchPage extends JFrame{
         addAllButtons(buttonPanel);
         centerPanel.add(buttonPanel);
 
+        // TRANSACTION ROUNDED PANEL - Main container
+        RoundedPanel transactionRoundedPanel = new RoundedPanel(15, style.white);
+        transactionRoundedPanel.setLayout(new BorderLayout());
+        transactionRoundedPanel.setPreferredSize(new Dimension(380, 300));
+        transactionRoundedPanel.setBorder(BorderFactory.createEmptyBorder(8, 8, 8, 8));
+
         // TRANSACTION HEADER PANEL (with "Transaction History" and "See all")
         JPanel transactionHeaderPanel = new JPanel(new BorderLayout());
+<<<<<<< Updated upstream
         transactionHeaderPanel.setPreferredSize(new Dimension(360, 40));
         transactionHeaderPanel.setBorder(BorderFactory.createEmptyBorder(10, 20, 10, 20));
         transactionHeaderPanel.setBackground(new Color(230, 240, 250));
+=======
+        transactionHeaderPanel.setPreferredSize(new Dimension(364, 35));
+        transactionHeaderPanel.setOpaque(false);
+>>>>>>> Stashed changes
 
         JLabel transactionLabel = new JLabel("Transaction History");
         transactionLabel.setFont(loadFont(Font.BOLD, 18f));
@@ -141,7 +148,12 @@ public class LaunchPage extends JFrame{
         // Create transaction history content panel
         JPanel transactionContentPanel = new JPanel();
         transactionContentPanel.setLayout(new BoxLayout(transactionContentPanel, BoxLayout.Y_AXIS));
+<<<<<<< Updated upstream
         transactionContentPanel.setBackground(new Color(230, 240, 250));
+=======
+        transactionContentPanel.setOpaque(false);
+        transactionContentPanel.setPreferredSize(new Dimension(364, 240));
+>>>>>>> Stashed changes
 
         // Add transaction items (hardcoded)
         transactionContentPanel.add(createDateSection("Today"));
@@ -150,6 +162,7 @@ public class LaunchPage extends JFrame{
         transactionContentPanel.add(createDateSection("Yesterday"));
         transactionContentPanel.add(createTransactionItem("3:35 AM", "Send Money", pesoSymbol + " -135.00", false));
 
+<<<<<<< Updated upstream
         transactionContentPanel.add(createDateSection("Feb 21, 2025"));
         transactionContentPanel.add(createTransactionItem("10:09 PM", "Send Money", pesoSymbol + " +2,600.00", true));
 
@@ -167,7 +180,17 @@ public class LaunchPage extends JFrame{
         transactionContainer.setMaximumSize(new Dimension(420, 430));
         transactionContainer.add(transactionHeaderPanel, BorderLayout.NORTH);
         transactionContainer.add(scrollPane, BorderLayout.CENTER);
+=======
+        // Add header and content to the rounded panel
+        transactionRoundedPanel.add(transactionHeaderPanel, BorderLayout.NORTH);
+        transactionRoundedPanel.add(transactionContentPanel, BorderLayout.CENTER);
+>>>>>>> Stashed changes
 
+        // Transaction container wrapper
+        JPanel transactionContainer = new JPanel(new FlowLayout());
+        transactionContainer.setOpaque(false);
+        transactionContainer.setMaximumSize(new Dimension(420, 320));
+        transactionContainer.add(transactionRoundedPanel);
 
         // Navigation bar at the bottom
         JPanel navBarPanel = new JPanel();
