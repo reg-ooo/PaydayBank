@@ -16,7 +16,7 @@ public class SplashScreen extends JWindow{
 
 
     public SplashScreen() {
-        this.setSize(420,750);
+        this.setSize(420,650);
 
         //PANEL MAKER
         RoundedPanel panel = new RoundedPanel(100, style.white);

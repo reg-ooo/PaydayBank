@@ -7,13 +7,16 @@ import java.util.ArrayList;
 public class LoginPage extends JFrame{
     Style style = new Style();
     Users user = new Users();
-    JFrame loginFrame = new JFrame();
-    JFrame registerFrame = new JFrame();
+    RoundedFrame loginFrame = new RoundedFrame(30);
+    RoundedFrame registerFrame = new RoundedFrame(30);
     ImageIcon appLogo = new ImageIcon("appLogo.png");
     boolean userValid = false, passValid = false;
+    JLabel loginLabel = new JLabel("Log In");
+    JLabel registerLabel = new JLabel("Sign Up");
 
     public LoginPage() {
-        loginFrame.setSize(420, 750);
+        //LOGIN FRAME
+        loginFrame.setSize(420, 650);
         loginFrame.setLocationRelativeTo(null);
         loginFrame.setTitle("Payday Bank");
         loginFrame.setIconImage(appLogo.getImage());
@@ -21,32 +24,43 @@ public class LoginPage extends JFrame{
         loginFrame.setBackground(Color.white);
         loginFrame.setUndecorated(true);
 
-        // Panels
-        JPanel nPanel = new JPanel();
-        JPanel loginPanel = new JPanel();
-        JPanel registerPanel = new JPanel();
-        RoundedPanel rPanelLogin = new RoundedPanel(15, Color.white);
-        RoundedPanel rPanelRegister = new RoundedPanel(15, Color.white);
-        JPanel cLoginPanel = new JPanel();
-        JPanel cRegisterPanel = new JPanel();
-        JPanel inputPanel = new JPanel();
+        //MAIN CONTAINER
+        JPanel mainContainer = new JPanel();
+        mainContainer.setLayout(new BoxLayout(mainContainer, BoxLayout.Y_AXIS));
+        mainContainer.setBackground(Color.white);
 
-        // North Panel
-        nPanel.setPreferredSize(new Dimension(420, 50));
+        // PANEL CREATE
+        //N PANEL
+        JPanel nPanel = new JPanel();
+        nPanel.setPreferredSize(new Dimension(420, 60));
+        nPanel.setMaximumSize(new Dimension(420, 60));
         nPanel.setLayout(new GridLayout(1,2));
         nPanel.setOpaque(false);
+        nPanel.setBorder(BorderFactory.createEmptyBorder(10,0,0,0));
 
+        //LOGIN PANEL
+        JPanel loginPanel = new JPanel();
         loginPanel.setLayout(new BorderLayout());
         loginPanel.setPreferredSize(new Dimension(210, 50));
 
+        //REGISTER PANEL
+        JPanel registerPanel = new JPanel();
         registerPanel.setLayout(new BorderLayout());
         registerPanel.setPreferredSize(new Dimension(210, 50));
 
+        //rPanelLogin
+        RoundedPanel rPanelLogin = new RoundedPanel(15, Color.white);
         rPanelLogin.setPreferredSize(new Dimension(170, 5));
         rPanelLogin.setBackground(style.pBlue);
 
+        //rPanelRegister
+        RoundedPanel rPanelRegister = new RoundedPanel(15, Color.white);
         rPanelRegister.setPreferredSize(new Dimension(170, 5));
         rPanelRegister.setBackground(style.transparent);
+
+        JPanel cRegisterPanel = new JPanel();
+
+        //------------------------------------TOP PANEL------------------------------------------------
 
         // North Bottom Panels
         JPanel loginBottomPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT, 0, 0));
@@ -57,21 +71,16 @@ public class LoginPage extends JFrame{
         registerBottomPanel.setOpaque(false);
         registerBottomPanel.setPreferredSize(new Dimension(210, 5));
 
-        // Label Container
+        // Label Containers
         JPanel loginLabelContainer = new JPanel();
-        JPanel registerLabelContainer = new JPanel();
-
         loginLabelContainer.setPreferredSize(new Dimension(60, 30));
         loginLabelContainer.setOpaque(false);
         loginLabelContainer.setLayout(new FlowLayout(FlowLayout.RIGHT, 60, 20));
 
+        JPanel registerLabelContainer = new JPanel();
         registerLabelContainer.setPreferredSize(new Dimension(60, 30));
         registerLabelContainer.setOpaque(false);
         registerLabelContainer.setLayout(new FlowLayout(FlowLayout.LEFT, 50, 20));
-
-        // North Labels
-        JLabel loginLabel = new JLabel("Login");
-        JLabel registerLabel = new JLabel("Sign Up");
 
         loginLabel.setFont(style.loadFont(Font.BOLD, 18f, "Quicksand-Regular"));
         loginLabel.setForeground(style.dBlue);
@@ -89,38 +98,64 @@ public class LoginPage extends JFrame{
         registerPanel.add(registerBottomPanel, BorderLayout.SOUTH);
         nPanel.add(loginPanel);
         nPanel.add(registerPanel);
+        //--------------------------------END OF TOP PANEL-----------------------------------------
 
-        // Center Area Login
+
+        //---------------------------------CENTER PANEL--------------------------------------------
+        JPanel centerPanel = new JPanel();
+        centerPanel.setLayout(new BoxLayout(centerPanel, BoxLayout.Y_AXIS));
+        centerPanel.setBackground(Color.white);
+        centerPanel.setBorder(BorderFactory.createEmptyBorder(0,0,0,0));
+        centerPanel.setPreferredSize(new Dimension(420, 200));
+        centerPanel.setMaximumSize(new Dimension(420, 200));
+        centerPanel.setMinimumSize(new Dimension(420, 200));
+
+        //logo
+        ImageIcon logo = new ImageIcon("appLogo.png");
+        Image scaledLogo = logo.getImage().getScaledInstance(250,250,Image.SCALE_SMOOTH);
+        ImageIcon resizedLogo = new ImageIcon(scaledLogo);
+
+        JLabel logoLabel = new JLabel(resizedLogo);
+        logoLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+
+        //add to center panel
+        centerPanel.add(logoLabel);
+
+        //-----------------------------END OF CENTER PANEL-------------------------------------------
+
+        //-----------------------------------BOTTOM PANEL--------------------------------------------
+
+        JPanel cLoginPanel = new JPanel();
         cLoginPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 40, 30));
         cLoginPanel.setBackground(Color.white);
 
+        JPanel inputPanel = new JPanel();
         inputPanel.setPreferredSize(new Dimension(350, 160));
         inputPanel.setBackground(Color.white);
         inputPanel.setLayout(new BoxLayout(inputPanel, BoxLayout.Y_AXIS));
 
         // Center Text Fields
         RoundedTextField userField = new RoundedTextField(13, new Color(234,232,228), style.transparent, 3);
-        RoundedTextField passField = new RoundedTextField(13, new Color(234,232,228), style.transparent, 3);
-
         userField.setPreferredSize(new Dimension(350, 50));
         userField.setMaximumSize(new Dimension(350, 50));
+        userField.setAlignmentX(Component.LEFT_ALIGNMENT);
 
+        RoundedTextField passField = new RoundedTextField(13, new Color(234,232,228), style.transparent, 3);
         passField.setPreferredSize(new Dimension(350, 50));
         passField.setMaximumSize(new Dimension(350, 50));
+        passField.setAlignmentX(Component.LEFT_ALIGNMENT);
 
         // Center Labels
         JLabel userLabel = new JLabel("Your Username");
-        JLabel passLabel = new JLabel("Your Password");
-
         userLabel.setFont(style.loadFont(Font.BOLD, 12f, "Quicksand-Bold"));
-        userLabel.setHorizontalAlignment(JLabel.LEFT);
-        passLabel.setFont(style.loadFont(Font.BOLD, 12f, "Quicksand-Bold"));
-
         userLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
-        passLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
-        userField.setAlignmentX(Component.LEFT_ALIGNMENT);
-        passField.setAlignmentX(Component.LEFT_ALIGNMENT);
 
+        JLabel passLabel = new JLabel("Your Password");
+        passLabel.setFont(style.loadFont(Font.BOLD, 12f, "Quicksand-Bold"));
+        passLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
+
+
+        //ADD INPUT PANELS
         inputPanel.add(Box.createVerticalStrut(10));
         inputPanel.add(userLabel);
         inputPanel.add(Box.createVerticalStrut(5));
@@ -137,6 +172,23 @@ public class LoginPage extends JFrame{
         loginButton.setForeground(Color.WHITE);
         loginButton.setFont(style.loadFont(Font.BOLD, 14f, "Quicksand-Bold"));
 
+        cLoginPanel.add(inputPanel);
+        cLoginPanel.add(loginButton);
+
+        //-------------------------------END OF BOTTOM PANEL-------------------------------------------
+
+        // Center Area Register
+        cRegisterPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 40, 30));
+        cRegisterPanel.setBackground(Color.white);
+
+        //ADD COMPONENTS TO FRAME
+        mainContainer.add(nPanel);
+        mainContainer.add(centerPanel);
+        mainContainer.add(cLoginPanel);
+
+        loginFrame.add(mainContainer, BorderLayout.CENTER);
+
+        //-------------------------------MOUSE LISTENERS---------------------------------------------
         loginButton.addActionListener(e -> {
             if(userField.getText().isEmpty()){
                 userField.setBorderColor(Color.red);
@@ -169,17 +221,7 @@ public class LoginPage extends JFrame{
             new LaunchPage();
         });
 
-        cLoginPanel.add(inputPanel);
-        cLoginPanel.add(loginButton);
-
-        // Center Area Register
-        cRegisterPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 40, 30));
-        cRegisterPanel.setBackground(Color.white);
-
-        loginFrame.add(nPanel, BorderLayout.NORTH);
-        loginFrame.add(cLoginPanel, BorderLayout.CENTER);
-
-        // loginPanel
+        // loginPanel MOUSE LISTENER
         loginPanel.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e){
@@ -190,7 +232,7 @@ public class LoginPage extends JFrame{
                 registerLabel.setForeground(new Color(178, 177, 177));
 
                 loginFrame.remove(cRegisterPanel);
-                loginFrame.add(cLoginPanel, BorderLayout.CENTER);
+                loginFrame.add(mainContainer, BorderLayout.CENTER);
                 loginFrame.revalidate();
                 loginFrame.repaint();
             }
@@ -212,6 +254,7 @@ public class LoginPage extends JFrame{
                 loginFrame.repaint();
             }
         });
+        //---------------------------------END OF MOUSE LISTENERS--------------------------------------
 
         loginFrame.setVisible(true);
     }

@@ -3,16 +3,16 @@ import java.awt.*;
 import java.awt.geom.*;
 import java.io.*;
 
-public class LaunchPage extends JFrame{
-    JFrame mainFrame = new JFrame();
+public class LaunchPage extends JFrame {
+    private Style style = new Style();
+
+    RoundedFrame mainFrame = new RoundedFrame(30);
 
     String pesoSymbol = "\u20B1";
-    Style style = new Style();
 
     // Images
     private ImageIcon bankTransferImg, buyCryptoImg, cashInImg, cashOutImg,
     requestMoneyImg, sendMoneyImg;
-
     private ImageIcon appLogo = new ImageIcon("appLogo.png");
 
     //WRAPPER BUTTONS
@@ -30,7 +30,7 @@ public class LaunchPage extends JFrame{
     public LaunchPage(){
         //MAIN FRAME
         mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        mainFrame.setSize(420, 750);
+        mainFrame.setSize(420, 650);
         mainFrame.setLocationRelativeTo(null);
         mainFrame.setTitle("Payday Bank");
         mainFrame.setIconImage(appLogo.getImage());
@@ -123,7 +123,7 @@ public class LaunchPage extends JFrame{
         // TRANSACTION HEADER PANEL (with "Transaction History" and "See all")
         JPanel transactionHeaderPanel = new JPanel(new BorderLayout());
         transactionHeaderPanel.setPreferredSize(new Dimension(360, 40));
-        transactionHeaderPanel.setBorder(BorderFactory.createEmptyBorder(10, 20, 10, 20));
+        transactionHeaderPanel.setBorder(BorderFactory.createEmptyBorder(0, 20, 0, 20));
         transactionHeaderPanel.setBackground(new Color(230, 240, 250));
 
         JLabel transactionLabel = new JLabel("Transaction History");
@@ -142,6 +142,7 @@ public class LaunchPage extends JFrame{
         JPanel transactionContentPanel = new JPanel();
         transactionContentPanel.setLayout(new BoxLayout(transactionContentPanel, BoxLayout.Y_AXIS));
         transactionContentPanel.setBackground(new Color(230, 240, 250));
+        transactionContentPanel.setPreferredSize(new Dimension(420, 200));
 
         // Add transaction items (hardcoded)
         transactionContentPanel.add(createDateSection("Today"));
@@ -150,23 +151,15 @@ public class LaunchPage extends JFrame{
         transactionContentPanel.add(createDateSection("Yesterday"));
         transactionContentPanel.add(createTransactionItem("3:35 AM", "Send Money", pesoSymbol + " -135.00", false));
 
-        transactionContentPanel.add(createDateSection("Feb 21, 2025"));
-        transactionContentPanel.add(createTransactionItem("10:09 PM", "Send Money", pesoSymbol + " +2,600.00", true));
-
-        // Make it scrollable
-        JScrollPane scrollPane = new JScrollPane(transactionContentPanel);
-        scrollPane.setBorder(BorderFactory.createEmptyBorder());
-        scrollPane.getViewport().setBackground(new Color(230, 240, 250));
-        scrollPane.setPreferredSize(new Dimension(400, 250));
-
         // Main transaction container that holds both header and content
         JPanel transactionContainer = new JPanel(new BorderLayout());
+        transactionContainer.setLayout(new BoxLayout(transactionContainer, BoxLayout.Y_AXIS));
         transactionContainer.setBackground(Color.yellow);
+        transactionContainer.setMaximumSize(new Dimension(420, 350));
+        transactionContainer.setBackground(style.pBlue);
 
-
-        transactionContainer.setMaximumSize(new Dimension(420, 430));
         transactionContainer.add(transactionHeaderPanel, BorderLayout.NORTH);
-        transactionContainer.add(scrollPane, BorderLayout.CENTER);
+        transactionContainer.add(transactionContentPanel, BorderLayout.CENTER);
 
 
         // Navigation bar at the bottom
