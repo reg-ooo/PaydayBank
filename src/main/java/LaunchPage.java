@@ -30,7 +30,7 @@ public class LaunchPage extends JFrame {
     public LaunchPage(){
         //MAIN FRAME
         mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        mainFrame.setSize(420, 650);
+        mainFrame.setSize(420, 750);
         mainFrame.setLocationRelativeTo(null);
         mainFrame.setTitle("Payday Bank");
         mainFrame.setIconImage(appLogo.getImage());
