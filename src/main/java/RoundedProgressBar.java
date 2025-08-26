@@ -6,12 +6,12 @@ public class RoundedProgressBar extends JComponent{
     private int progress = 0;
     private int minimum = 0;
     private int maximum = 100;
-    private ColorPalette colorPalette = new ColorPalette();
-    private Color foregroundColor = colorPalette.dBlue;
-    private Color backgroundColor = colorPalette.gray;
+    private Style style = new Style();
+    private Color foregroundColor = style.dBlue;
+    private Color backgroundColor = style.gray;
     private int cornerRadius;
     private String text = "";
-    private Color textColor = colorPalette.white;
+    private Color textColor = style.white;
 
     public RoundedProgressBar(int cornerRadius, int width, int height){
         this.cornerRadius = cornerRadius;

@@ -7,7 +7,7 @@ public class LaunchPage extends JFrame{
     JFrame mainFrame = new JFrame();
 
     String pesoSymbol = "\u20B1";
-    ColorPalette color = new ColorPalette();
+    Style style = new Style();
 
     // Images
     private ImageIcon bankTransferImg, buyCryptoImg, cashInImg, cashOutImg,
@@ -20,12 +20,12 @@ public class LaunchPage extends JFrame{
     bankTransferWrapper, buyCryptoWrapper;
 
     //Buttons
-    private RoundedPanel payBillsBtn = new RoundedPanel(25, color.dBlue);
-    private RoundedPanel cashInBtn = new RoundedPanel(25, color.dBlue);
-    private RoundedPanel cashOutBtn = new RoundedPanel(25, color.dBlue);
-    private RoundedPanel requestMoneyBtn = new RoundedPanel(25, color.dBlue);
-    private RoundedPanel bankTransferBtn = new RoundedPanel(25, color.dBlue);
-    private RoundedPanel buyCryptoBtn = new RoundedPanel(25, color.dBlue);
+    private RoundedPanel payBillsBtn = new RoundedPanel(25, style.pBlue);
+    private RoundedPanel cashInBtn = new RoundedPanel(25, style.pBlue);
+    private RoundedPanel cashOutBtn = new RoundedPanel(25, style.pBlue);
+    private RoundedPanel requestMoneyBtn = new RoundedPanel(25, style.pBlue);
+    private RoundedPanel bankTransferBtn = new RoundedPanel(25, style.pBlue);
+    private RoundedPanel buyCryptoBtn = new RoundedPanel(25, style.pBlue);
 
     public LaunchPage(){
         mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -48,12 +48,12 @@ public class LaunchPage extends JFrame{
         nPanel.setLayout(new FlowLayout());
         nPanel.setPreferredSize(new Dimension(360, 120));
 
-        RoundedPanel balPanel = new RoundedPanel(15, color.dBlue);
+        RoundedPanel balPanel = new RoundedPanel(15, style.pBlue);
         balPanel.setLayout(new BorderLayout());
         balPanel.setPreferredSize(new Dimension(360, 80));
 
         balanceText.setFont(new Font("Open Sans", Font.BOLD, 12));
-        balanceText.setForeground(color.gray);
+        balanceText.setForeground(style.gray);
         balanceText.setHorizontalTextPosition(JLabel.LEFT);
 
         upperBalancePanel.setLayout(new FlowLayout(FlowLayout.LEFT, 15, 10));
@@ -62,7 +62,7 @@ public class LaunchPage extends JFrame{
 
         amountText.setFont(loadFont(Font.PLAIN, 35f));
         amountText.setVerticalTextPosition(JLabel.CENTER);
-        amountText.setForeground(color.white);
+        amountText.setForeground(style.white);
 
         amountPanel.setOpaque(false);
         amountPanel.setLayout(new FlowLayout(FlowLayout.LEFT, 15, 0));
@@ -115,7 +115,7 @@ public class LaunchPage extends JFrame{
 
         JLabel transactionLabel = new JLabel("Transaction History");
         transactionLabel.setFont(loadFont(Font.BOLD, 18f));
-        transactionLabel.setForeground(color.dBlue);
+        transactionLabel.setForeground(style.dBlue);
 
         // Spacer panel to fill remaining space
         JPanel spacerPanel = new JPanel();
@@ -132,7 +132,7 @@ public class LaunchPage extends JFrame{
         JPanel navBarPanel = new JPanel();
         navBarPanel.setLayout(new GridLayout(1, 4));
         navBarPanel.setPreferredSize(new Dimension(420, 70));
-        navBarPanel.setForeground(color.dBlue);
+        navBarPanel.setForeground(style.dBlue);
 
         // Create navigation buttons
         JPanel homeBtn = createNavButton("🏠", "Home", true);
@@ -149,7 +149,7 @@ public class LaunchPage extends JFrame{
 
         JLabel seeAllLabel = new JLabel("See all");
         seeAllLabel.setFont(loadFont(Font.PLAIN, 14f));
-        seeAllLabel.setForeground(color.pBlue);
+        seeAllLabel.setForeground(style.pBlue);
         seeAllLabel.setCursor(new Cursor(Cursor.HAND_CURSOR));
 
         transactionPanel.add(transactionLabel, BorderLayout.WEST);
@@ -178,7 +178,7 @@ public class LaunchPage extends JFrame{
     private JPanel createNavButton(String icon, String text, boolean isActive) {
         JPanel navButton = new JPanel();
         navButton.setLayout(new BoxLayout(navButton, BoxLayout.Y_AXIS));
-        navButton.setBackground(color.dBlue);
+        navButton.setBackground(style.pBlue);
         navButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
         navButton.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
 
@@ -253,27 +253,31 @@ public class LaunchPage extends JFrame{
         JLabel imageLabel = new JLabel(image);
         imageLabel.setIcon(image);
         imageLabel.setHorizontalAlignment(JLabel.CENTER);
-        imageLabel.setForeground(color.gray);
+        imageLabel.setForeground(style.gray);
 
         //TEXT LABEL
         JLabel buttonLabel = new JLabel(text);
         buttonLabel.setFont(loadFont(Font.BOLD, 12f));
-        buttonLabel.setForeground(color.dBlue);
+        buttonLabel.setForeground(style.pBlue);
         buttonLabel.setHorizontalAlignment(JLabel.CENTER);
-        buttonLabel.setBorder(BorderFactory.createEmptyBorder(5, 0, 0, 0));
+        buttonLabel.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));
         button.add(imageLabel, BorderLayout.CENTER);
 
         button.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                button.setBackground(color.pBlue);
-                imageLabel.setForeground(color.white);
+                button.setBackground(style.dBlue);
+                buttonLabel.setForeground(style.dBlue);
+                button.setPreferredSize(new Dimension(55, 75));
 
+                revalidateParentContainers(button);
                 button.repaint();
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                button.setBackground(color.dBlue);
-                imageLabel.setForeground(color.gray);
+                button.setBackground(style.pBlue);
+                buttonLabel.setForeground(style.pBlue);
+                button.setPreferredSize(new Dimension(50, 70));
 
+                revalidateParentContainers(button);
                 button.repaint();
             }
         });
@@ -284,4 +288,11 @@ public class LaunchPage extends JFrame{
         return wrapperPanel;
     }
 
+    private void revalidateParentContainers(Component button) {
+        Container parent = button.getParent();
+        if (parent != null) {
+            parent.revalidate();
+            parent = parent.getParent();
+        }
+    }
 }

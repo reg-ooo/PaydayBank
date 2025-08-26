@@ -6,7 +6,7 @@ import java.util.concurrent.TimeUnit;
 
 public class SplashScreen extends JWindow{
 
-    private ColorPalette palette = new ColorPalette();
+    private Style style = new Style();
     private ImageIcon originalLogo = new ImageIcon("appLogo.png");
     private JPanel contentPanel = new JPanel(new BorderLayout(0, 20));
     private JLabel logoLabel = new JLabel();
@@ -19,7 +19,7 @@ public class SplashScreen extends JWindow{
         this.setSize(420,750);
 
         //PANEL MAKER
-        RoundedPanel panel = new RoundedPanel(100, palette.white);
+        RoundedPanel panel = new RoundedPanel(100, style.white);
         panel.setLayout(new BorderLayout());
 
         //RESIZE IMAGE
@@ -38,7 +38,7 @@ public class SplashScreen extends JWindow{
         panel.add(contentPanel, BorderLayout.CENTER);
 
         //SET LAYOUT OF JWINDOW
-        this.setBackground(palette.transparent);
+        this.setBackground(style.transparent);
         this.getContentPane().setLayout(new BorderLayout());
         this.getContentPane().add(panel, BorderLayout.CENTER);
         this.setLocationRelativeTo(null);

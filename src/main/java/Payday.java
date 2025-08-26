@@ -18,7 +18,7 @@ public class Payday {
         //RUNS LAUNCH PAGE AFTER INITIALIZATION
         SwingUtilities.invokeLater(new Runnable() {
             public void run() {
-                new LaunchPage();
+                new LoginPage();
             }
         });
 
