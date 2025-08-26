@@ -8,9 +8,6 @@ public class Payday {
     static ResultSet rs;
 
     public static void main(String[] args) {
-
-
-
         //Initalize SplashScreen before launch page
         SplashScreen splash = new SplashScreen();
         splash.showSplash(3);
@@ -23,8 +20,6 @@ public class Payday {
         });
 
         DBConnect();
-//        new LoginPage();
-
     }
     
     public static void DBConnect(){

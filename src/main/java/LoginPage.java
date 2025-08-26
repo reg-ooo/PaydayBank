@@ -19,6 +19,7 @@ public class LoginPage extends JFrame{
         loginFrame.setIconImage(appLogo.getImage());
         loginFrame.setResizable(false);
         loginFrame.setBackground(Color.white);
+        loginFrame.setUndecorated(true);
 
         // Panels
         JPanel nPanel = new JPanel();

@@ -28,6 +28,7 @@ public class LaunchPage extends JFrame{
     private RoundedPanel buyCryptoBtn = new RoundedPanel(25, style.pBlue);
 
     public LaunchPage(){
+        //MAIN FRAME
         mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         mainFrame.setSize(420, 750);
         mainFrame.setLocationRelativeTo(null);
@@ -35,40 +36,50 @@ public class LaunchPage extends JFrame{
         mainFrame.setIconImage(appLogo.getImage());
         mainFrame.setResizable(false);
         mainFrame.setLayout(new BorderLayout());
+        mainFrame.setUndecorated(true);
 
+        //UPPER PANELS
         JPanel nPanel = new JPanel();
         JPanel headerPanel = new JPanel();
         JPanel upperBalancePanel = new JPanel();
         JPanel amountPanel = new JPanel();
 
+        //LABELS
         JLabel balanceText = new JLabel("Available Balance: ");
         JLabel pesoSign = new JLabel(pesoSymbol);
         JLabel amountText = new JLabel(String.format( "%s 15,000", pesoSymbol));
 
+        //NORTH PANEL
         nPanel.setLayout(new FlowLayout());
         nPanel.setPreferredSize(new Dimension(360, 120));
 
+        //BALANCE PANEL
         RoundedPanel balPanel = new RoundedPanel(15, style.pBlue);
         balPanel.setLayout(new BorderLayout());
         balPanel.setPreferredSize(new Dimension(360, 80));
 
+        //BALANCE TEXT
         balanceText.setFont(new Font("Open Sans", Font.BOLD, 12));
         balanceText.setForeground(style.gray);
         balanceText.setHorizontalTextPosition(JLabel.LEFT);
 
+        //UPPER BALANCE PANEL
         upperBalancePanel.setLayout(new FlowLayout(FlowLayout.LEFT, 15, 10));
         upperBalancePanel.setOpaque(false);
         upperBalancePanel.setPreferredSize(new Dimension(360, 30));
 
+        //BALANCE AMOUNT
         amountText.setFont(loadFont(Font.PLAIN, 35f));
         amountText.setVerticalTextPosition(JLabel.CENTER);
         amountText.setForeground(style.white);
 
+        //AMOUNT PANEL
         amountPanel.setOpaque(false);
         amountPanel.setLayout(new FlowLayout(FlowLayout.LEFT, 15, 0));
 
         headerPanel.setPreferredSize(new Dimension(420, 15));
 
+        //ADD COMPONENTS
         balPanel.add(amountPanel);
         balPanel.add(upperBalancePanel, BorderLayout.NORTH);
 
@@ -78,14 +89,16 @@ public class LaunchPage extends JFrame{
         nPanel.add(headerPanel);
         nPanel.add(balPanel);
 
+        //CENTER PANEL
         JPanel centerPanel = new JPanel();
-        centerPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 10));
-        centerPanel.setPreferredSize(new Dimension(420, 180));
+        centerPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 15));
+        centerPanel.setPreferredSize(new Dimension(420, 200));
+        centerPanel.setMaximumSize(new Dimension(420, 230));
 
 
         //BUTTON PANELS
         JPanel buttonPanel = new JPanel();
-        buttonPanel.setLayout(new GridLayout(2, 3, 25, 15));
+        buttonPanel.setLayout(new GridLayout(2, 3, 25, 10));
 
         //RESIZE BUTTON IMAGES
         sendMoneyImg = resizeImage("sendMoney.png");
@@ -107,31 +120,59 @@ public class LaunchPage extends JFrame{
         addAllButtons(buttonPanel);
         centerPanel.add(buttonPanel);
 
-        //TRANSACTION PANEL
-        JPanel transactionPanel = new JPanel();
-        transactionPanel.setLayout(new BorderLayout());
-        transactionPanel.setPreferredSize(new Dimension(360, 40));
-        transactionPanel.setBorder(BorderFactory.createEmptyBorder(20, 0, 0, 0));
+        // TRANSACTION HEADER PANEL (with "Transaction History" and "See all")
+        JPanel transactionHeaderPanel = new JPanel(new BorderLayout());
+        transactionHeaderPanel.setPreferredSize(new Dimension(360, 40));
+        transactionHeaderPanel.setBorder(BorderFactory.createEmptyBorder(10, 20, 10, 20));
+        transactionHeaderPanel.setBackground(new Color(230, 240, 250));
 
         JLabel transactionLabel = new JLabel("Transaction History");
         transactionLabel.setFont(loadFont(Font.BOLD, 18f));
         transactionLabel.setForeground(style.dBlue);
 
-        // Spacer panel to fill remaining space
-        JPanel spacerPanel = new JPanel();
-        spacerPanel.setBackground(new Color(230, 240, 250)); // #E6F0FA
+        JLabel seeAllLabel = new JLabel("See all");
+        seeAllLabel.setFont(loadFont(Font.PLAIN, 14f));
+        seeAllLabel.setForeground(style.pBlue);
+        seeAllLabel.setCursor(new Cursor(Cursor.HAND_CURSOR));
 
-        // Bottom panel with custom blue color for transaction history
-        JPanel bottomGrayPanel = new JPanel();
-        bottomGrayPanel.setLayout(new BorderLayout());
-        bottomGrayPanel.setBackground(new Color(230, 240, 250));
-        bottomGrayPanel.add(transactionPanel, BorderLayout.NORTH);
-        bottomGrayPanel.add(spacerPanel, BorderLayout.CENTER);
+        transactionHeaderPanel.add(transactionLabel, BorderLayout.WEST);
+        transactionHeaderPanel.add(seeAllLabel, BorderLayout.EAST);
+
+        // Create transaction history content panel
+        JPanel transactionContentPanel = new JPanel();
+        transactionContentPanel.setLayout(new BoxLayout(transactionContentPanel, BoxLayout.Y_AXIS));
+        transactionContentPanel.setBackground(new Color(230, 240, 250));
+
+        // Add transaction items (hardcoded)
+        transactionContentPanel.add(createDateSection("Today"));
+        transactionContentPanel.add(createTransactionItem("1:49 AM", "Pay via Scanned QR", pesoSymbol + " -100.00", false));
+
+        transactionContentPanel.add(createDateSection("Yesterday"));
+        transactionContentPanel.add(createTransactionItem("3:35 AM", "Send Money", pesoSymbol + " -135.00", false));
+
+        transactionContentPanel.add(createDateSection("Feb 21, 2025"));
+        transactionContentPanel.add(createTransactionItem("10:09 PM", "Send Money", pesoSymbol + " +2,600.00", true));
+
+        // Make it scrollable
+        JScrollPane scrollPane = new JScrollPane(transactionContentPanel);
+        scrollPane.setBorder(BorderFactory.createEmptyBorder());
+        scrollPane.getViewport().setBackground(new Color(230, 240, 250));
+        scrollPane.setPreferredSize(new Dimension(400, 250));
+
+        // Main transaction container that holds both header and content
+        JPanel transactionContainer = new JPanel(new BorderLayout());
+        transactionContainer.setBackground(Color.yellow);
+
+
+        transactionContainer.setMaximumSize(new Dimension(420, 430));
+        transactionContainer.add(transactionHeaderPanel, BorderLayout.NORTH);
+        transactionContainer.add(scrollPane, BorderLayout.CENTER);
+
 
         // Navigation bar at the bottom
         JPanel navBarPanel = new JPanel();
         navBarPanel.setLayout(new GridLayout(1, 4));
-        navBarPanel.setPreferredSize(new Dimension(420, 70));
+        navBarPanel.setPreferredSize(new Dimension(420, 60));
         navBarPanel.setForeground(style.dBlue);
 
         // Create navigation buttons
@@ -146,19 +187,18 @@ public class LaunchPage extends JFrame{
         navBarPanel.add(walletBtn);
         navBarPanel.add(notificationBtn);
 
+        centerPanel.setBorder(BorderFactory.createEmptyBorder(0, 0, 0,0));
 
-        JLabel seeAllLabel = new JLabel("See all");
-        seeAllLabel.setFont(loadFont(Font.PLAIN, 14f));
-        seeAllLabel.setForeground(style.pBlue);
-        seeAllLabel.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        // Create a main content panel
+        JPanel mainContentPanel = new JPanel();
+        mainContentPanel.setLayout(new BoxLayout(mainContentPanel, BoxLayout.Y_AXIS));
+        mainContentPanel.add(centerPanel);
+        mainContentPanel.add(transactionContainer);
 
-        transactionPanel.add(transactionLabel, BorderLayout.WEST);
-        transactionPanel.add(seeAllLabel, BorderLayout.EAST);
 
-        centerPanel.add(transactionPanel);
 
         mainFrame.add(nPanel, BorderLayout.NORTH);
-        mainFrame.add(centerPanel, BorderLayout.CENTER);
+        mainFrame.add(mainContentPanel, BorderLayout.CENTER);
         mainFrame.add(navBarPanel, BorderLayout.SOUTH);
         mainFrame.setVisible(true);
     }
@@ -180,11 +220,12 @@ public class LaunchPage extends JFrame{
         navButton.setLayout(new BoxLayout(navButton, BoxLayout.Y_AXIS));
         navButton.setBackground(style.pBlue);
         navButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
-        navButton.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+        navButton.setBorder(BorderFactory.createEmptyBorder(10, 10, 5, 10));
 
         JLabel iconLabel = new JLabel(icon);
         iconLabel.setFont(new Font("Segoe UI Emoji", Font.PLAIN, 20));
         iconLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+
         iconLabel.setForeground(isActive ? Color.WHITE : new Color(150, 150, 150));
 
         JLabel textLabel = new JLabel(text);
@@ -287,6 +328,56 @@ public class LaunchPage extends JFrame{
 
         return wrapperPanel;
     }
+
+    // Add this method to create transaction history items
+    private JPanel createTransactionItem(String time, String description, String amount, boolean isPositive) {
+        JPanel transactionPanel = new JPanel(new BorderLayout());
+        transactionPanel.setBackground(new Color(230, 240, 250));
+        transactionPanel.setBorder(BorderFactory.createEmptyBorder(5, 10, 5, 10));
+
+        // Left side: Time and description
+        JPanel leftPanel = new JPanel();
+        leftPanel.setLayout(new BoxLayout(leftPanel, BoxLayout.Y_AXIS));
+        leftPanel.setBackground(new Color(230, 240, 250));
+
+        JLabel descLabel = new JLabel(description);
+        descLabel.setFont(loadFont(Font.PLAIN, 14f));
+        descLabel.setForeground(Color.BLACK);
+
+        JLabel timeLabel = new JLabel(time);
+        timeLabel.setFont(loadFont(Font.PLAIN, 12f));
+        timeLabel.setForeground(Color.GRAY);
+
+        leftPanel.add(descLabel);
+        leftPanel.add(timeLabel);
+
+        // Right side: Amount
+        JLabel amountLabel = new JLabel(amount);
+        amountLabel.setFont(loadFont(Font.BOLD, 14f));
+        amountLabel.setForeground(isPositive ? new Color(0, 128, 0) : Color.RED); // Green for positive, red for negative
+        amountLabel.setHorizontalAlignment(SwingConstants.RIGHT);
+
+        transactionPanel.add(leftPanel, BorderLayout.WEST);
+        transactionPanel.add(amountLabel, BorderLayout.EAST);
+
+        return transactionPanel;
+    }
+
+    // Add this method to create date sections
+    private JPanel createDateSection(String date) {
+        JPanel datePanel = new JPanel(new BorderLayout());
+        datePanel.setBackground(new Color(230, 240, 250));
+        datePanel.setBorder(BorderFactory.createEmptyBorder(15, 10, 5, 10));
+
+        JLabel dateLabel = new JLabel(date);
+        dateLabel.setFont(loadFont(Font.BOLD, 16f));
+        dateLabel.setForeground(style.dBlue);
+
+        datePanel.add(dateLabel, BorderLayout.WEST);
+
+        return datePanel;
+    }
+
 
     private void revalidateParentContainers(Component button) {
         Container parent = button.getParent();
