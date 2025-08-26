@@ -16,7 +16,7 @@ public class LoginPage extends JFrame{
 
     public LoginPage() {
         //LOGIN FRAME
-        loginFrame.setSize(420, 650);
+        loginFrame.setSize(420, 750);
         loginFrame.setLocationRelativeTo(null);
         loginFrame.setTitle("Payday Bank");
         loginFrame.setIconImage(appLogo.getImage());

@@ -10,7 +10,7 @@ public class Payday {
     public static void main(String[] args) {
         //Initalize SplashScreen before launch page
         SplashScreen splash = new SplashScreen();
-        splash.showSplash(0);
+        splash.showSplash(1);
 
         //RUNS LAUNCH PAGE AFTER INITIALIZATION
         SwingUtilities.invokeLater(new Runnable() {
