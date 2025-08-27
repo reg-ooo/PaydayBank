@@ -148,15 +148,20 @@ public class LaunchPage extends JFrame {
         navBarPanel.setForeground(style.dBlue);
 
         // Create navigation buttons
-        JPanel homeBtn = createNavButton("🏠", "Home", true);
-        JPanel logoBtn = createLogoNavButton();
         JPanel profileBtn = createNavButton("👤", "Profile", false);
+        JPanel logoBtn = createLogoNavButton();
+        JPanel exitBtn = createNavButton("\uD83C\uDFC3", "Exit", false);
+
+        profileBtn.addMouseListener(new java.awt.event.MouseAdapter() {
+           public void mouseClicked(java.awt.event.MouseEvent evt) {
+               System.exit(0);
+           }
+        });
 
         //ADD BUTTONS TO NAV BAR
-        navBarPanel.add(homeBtn);
-        navBarPanel.add(logoBtn);
         navBarPanel.add(profileBtn);
-
+        navBarPanel.add(logoBtn);
+        navBarPanel.add(exitBtn);
 
         // Create a main content panel
         JPanel mainContentPanel = new JPanel();
