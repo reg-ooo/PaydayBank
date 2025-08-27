@@ -128,6 +128,7 @@ public class LoginPage extends JFrame{
         JPanel cLoginPanel = new JPanel();
         cLoginPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 40, 30));
         cLoginPanel.setBackground(Color.white);
+        cLoginPanel.setOpaque(false);
 
         JPanel inputPanel = new JPanel();
         inputPanel.setPreferredSize(new Dimension(350, 160));
@@ -171,6 +172,7 @@ public class LoginPage extends JFrame{
         loginButton.setPreferredSize(new Dimension(350, 50));
         loginButton.setForeground(Color.WHITE);
         loginButton.setFont(style.loadFont(Font.BOLD, 14f, "Quicksand-Bold"));
+
 
         cLoginPanel.add(inputPanel);
         cLoginPanel.add(loginButton);
@@ -230,6 +232,7 @@ public class LoginPage extends JFrame{
 
                 loginLabel.setForeground(style.dBlue);
                 registerLabel.setForeground(new Color(178, 177, 177));
+                loginButton.setText("Login");
 
                 loginFrame.remove(cRegisterPanel);
                 loginFrame.add(mainContainer, BorderLayout.CENTER);
@@ -247,6 +250,7 @@ public class LoginPage extends JFrame{
 
                 loginLabel.setForeground(new Color(178, 177, 177));
                 registerLabel.setForeground(style.dBlue);
+                loginButton.setText("Register");
 
                 loginFrame.remove(cLoginPanel);
                 loginFrame.add(cRegisterPanel, BorderLayout.CENTER);
