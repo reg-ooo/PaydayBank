@@ -41,4 +41,5 @@ public class Payday {
             System.out.println("Failed to connect to database: " + e.getMessage());
         }
     }
+
 }

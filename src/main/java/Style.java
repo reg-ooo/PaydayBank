@@ -17,8 +17,8 @@ public final class Style {
     public Font loadFont(int style, float size, String fontName) {
         try {
             InputStream fontStream = getClass().getResourceAsStream("/fonts/" + fontName + ".ttf");
-            Font karlaFont = Font.createFont(Font.TRUETYPE_FONT, fontStream);
-            return karlaFont.deriveFont(style, size);
+            Font chosenFont = Font.createFont(Font.TRUETYPE_FONT, fontStream);
+            return chosenFont.deriveFont(style, size);
         } catch (Exception e) {
             System.out.println("Could not load font: " + e.getMessage());
 
