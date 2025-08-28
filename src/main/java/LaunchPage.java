@@ -26,7 +26,7 @@ public class LaunchPage extends JFrame {
     public LaunchPage(){
         //MAIN FRAME
         mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        mainFrame.setSize(420, 750);
+        mainFrame.setSize(420, 650);
         mainFrame.setLocationRelativeTo(null);
         mainFrame.setTitle("Payday Bank");
         mainFrame.setIconImage(appLogo.getImage());
@@ -107,7 +107,7 @@ public class LaunchPage extends JFrame {
 // TRANSACTION ROUNDED PANEL - Main container
         RoundedPanel transactionRoundedPanel = new RoundedPanel(15, style.sBlue);
         transactionRoundedPanel.setLayout(new BorderLayout());
-        transactionRoundedPanel.setPreferredSize(new Dimension(380, 300));
+        transactionRoundedPanel.setPreferredSize(new Dimension(380, 150));
         transactionRoundedPanel.setBorder(BorderFactory.createEmptyBorder(8, 8, 8, 8));
 
 // TRANSACTION HEADER PANEL (with "Transaction History" and "See all")
@@ -143,8 +143,8 @@ public class LaunchPage extends JFrame {
         RoundedBorder transactionContainer = new RoundedBorder(15, style.pBlue, 2);
         transactionContainer.setLayout(new FlowLayout());
         transactionContainer.setOpaque(false);
-        transactionContainer.setMaximumSize(new Dimension(390, 320));
-        transactionContainer.setPreferredSize(new Dimension(390, 320));
+        transactionContainer.setMaximumSize(new Dimension(390, 160));
+        transactionContainer.setPreferredSize(new Dimension(390, 160));
         transactionContainer.add(transactionRoundedPanel);
 
         // Navigation bar at the bottom
@@ -219,6 +219,8 @@ public class LaunchPage extends JFrame {
             public void mouseClicked(MouseEvent e) {
                 if (exit) {
                     System.exit(0);
+                } else {
+                    JOptionPane.showMessageDialog(mainFrame, "Nav Button Pressed!");
                 }
             }
         });
@@ -297,7 +299,7 @@ public class LaunchPage extends JFrame {
         button.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 button.setBackground(style.dBlue);
-                buttonLabel.setForeground(style.dBlue);
+                buttonLabel.setForeground(style.pBlue);
                 button.setPreferredSize(new Dimension(55, 75));
 
                 revalidateParentContainers(button);
@@ -305,11 +307,14 @@ public class LaunchPage extends JFrame {
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 button.setBackground(style.pBlue);
-                buttonLabel.setForeground(style.pBlue);
+                buttonLabel.setForeground(style.dBlue);
                 button.setPreferredSize(new Dimension(50, 70));
 
                 revalidateParentContainers(button);
                 button.repaint();
+            }
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                JOptionPane.showMessageDialog(mainFrame, "Button Pressed!");
             }
         });
 

@@ -16,7 +16,7 @@ public class SplashScreen extends JWindow{
 
 
     public SplashScreen() {
-        this.setSize(420,750);
+        this.setSize(420,650);
 
         //PANEL MAKER
         RoundedPanel panel = new RoundedPanel(100, style.white);
@@ -68,7 +68,7 @@ public class SplashScreen extends JWindow{
     }
 
     private void startProgressBar() {
-        timer = new Timer(46, new ActionListener() {
+        timer = new Timer(27, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 progress += 2;
