@@ -11,6 +11,8 @@ public final class Style {
     public static final Color lBlue = new Color(0xC4E4FF);
     public static final Color black = new Color(0x000000);
     public static final Color white = new Color(0xFFFFFF);
+    public static final Color vBlue = new Color(0x1A43BF);
+    public static final Color dvBlue = new Color(0x123499);
     public static final Color transparent = new Color(0,0,0,0);
 
 
