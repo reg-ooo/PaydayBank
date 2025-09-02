@@ -14,7 +14,6 @@ public class LaunchPage extends JFrame {
     RoundedFrame mainFrame = new RoundedFrame(30);
     final ImageIcon appLogo = new ImageIcon("appLogo.png");
 
-    //main panels
     NPanel nPanel = new NPanel();
     TransactionPanel tPanel = new TransactionPanel();
     NavigationBar navBarPanel = new NavigationBar();
@@ -22,7 +21,6 @@ public class LaunchPage extends JFrame {
 
     ArrayList<RoundedBorder> buttons = new ArrayList<>();
     public LaunchPage(){
-        //MAIN FRAME
         mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         mainFrame.setSize(420, 650);
         mainFrame.setLocationRelativeTo(null);
@@ -31,19 +29,21 @@ public class LaunchPage extends JFrame {
         mainFrame.setResizable(false);
         mainFrame.setLayout(new BorderLayout());
         mainFrame.setUndecorated(true);
-        mainFrame.setBackground(Color.white);
-        mainFrame.getContentPane().setBackground(Color.white);
+        mainFrame.setBackground(Color.WHITE);
+        mainFrame.getContentPane().setBackground(Color.WHITE);
 
         JPanel mainContentPanel = new JPanel();
-        mainContentPanel.setLayout(new BoxLayout(mainContentPanel, BoxLayout.Y_AXIS));
-        mainContentPanel.add(centerPanel);
-        mainContentPanel.add(tPanel);
-        mainContentPanel.setBackground(style.white);
+        CardLayout cardLayout = new CardLayout();
+        mainContentPanel.setLayout(cardLayout);
+        mainContentPanel.add(centerPanel, "main");
+        mainContentPanel.add(tPanel, "transaction");
 
         mainFrame.add(nPanel, BorderLayout.NORTH);
         mainFrame.add(mainContentPanel, BorderLayout.CENTER);
         mainFrame.add(navBarPanel, BorderLayout.SOUTH);
+
+        cardLayout.show(mainContentPanel, "main");
+
         mainFrame.setVisible(true);
     }
 }
-
