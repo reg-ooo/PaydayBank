@@ -1,8 +1,13 @@
+package pages;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.concurrent.TimeUnit;
+import components.*;
+import panels.*;// Import from components package
+
 
 public class SplashScreen extends JWindow{
 

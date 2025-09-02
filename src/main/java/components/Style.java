@@ -1,3 +1,6 @@
+package components;
+
+import javax.swing.*;
 import java.awt.*;
 import java.io.InputStream;
 
@@ -15,6 +18,9 @@ public final class Style {
     public static final Color dvBlue = new Color(0x123499);
     public static final Color transparent = new Color(0,0,0,0);
 
+    //PESO SIGN
+    public final String pesoSymbol = "\u20B1";
+    JLabel pesoSign = new JLabel(pesoSymbol);
 
     public Font loadFont(int style, float size, String fontName) {
         try {

@@ -1,11 +1,16 @@
+package main;
+
 import javax.swing.*;
+import java.awt.*;
 import java.sql.*;
+import pages.SplashScreen;
+import pages.*;
 
 public class Payday {
-    static String db,uname,pswd;
-    static Connection con;
-    static Statement st;
-    static ResultSet rs;
+    public static String db,uname,pswd;
+    public static Connection con;
+    public static Statement st;
+    public static ResultSet rs;
 
     public static void main(String[] args) {
         //Initalize SplashScreen before launch page

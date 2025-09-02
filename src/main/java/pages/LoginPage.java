@@ -1,12 +1,16 @@
+package pages;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
+import components.*;
+import panels.*;
 
 public class LoginPage extends JFrame{
     Style style = new Style();
-    Users user = new Users();
+    //Users user = new Users();
     RoundedFrame loginFrame = new RoundedFrame(30);
     RoundedFrame registerFrame = new RoundedFrame(30);
     ImageIcon appLogo = new ImageIcon("appLogo.png");
@@ -216,7 +220,7 @@ public class LoginPage extends JFrame{
             loginFrame.repaint();
             System.out.println("press");
             if(userValid && passValid){
-                user.loginAccount(userField.getText(), passField.getText());
+                //user.loginAccount(userField.getText(), passField.getText());
             }
 
             this.dispose();

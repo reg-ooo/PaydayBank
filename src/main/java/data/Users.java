@@ -1,3 +1,8 @@
+package data;
+
+import pages.*;
+import main.Payday;
+
 public class Users extends Payday{
 
     public void addUser(String username, String password){
