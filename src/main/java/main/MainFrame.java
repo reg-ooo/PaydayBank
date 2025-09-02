@@ -5,6 +5,7 @@ import components.RoundedFrame;
 import javax.swing.*;
 import java.awt.*;
 import pages.*;
+import panels.*;
 
 public class MainFrame extends JFrame {
     private RoundedFrame mainFrame = new RoundedFrame(30);
@@ -34,6 +35,7 @@ public class MainFrame extends JFrame {
         mainPanel = new JPanel(cardLayout);
 
         mainPanel.add(new LoginPage(this::changeCard), "Login");
+        mainPanel.add(new LaunchPage(), "Launch");
         mainFrame.setContentPane(mainPanel);
     }
 

@@ -8,26 +8,18 @@ import java.util.ArrayList;
 import java.util.function.Consumer;
 
 import components.*;
+import data.Users;
 import panels.*;
 
 public class LoginPage extends JPanel{
     Style style = new Style();
-//    RoundedFrame loginFrame = new RoundedFrame(30);
+    Users user = new Users();
     ImageIcon appLogo = new ImageIcon("appLogo.png");
     boolean userValid = false, passValid = false;
     JLabel loginLabel = new JLabel("Log In");
     JLabel registerLabel = new JLabel("Sign Up");
 
     public LoginPage(Consumer<String> onButtonClick) {
-        //LOGIN FRAME
-//        loginFrame.setSize(420, 650);
-//        loginFrame.setLocationRelativeTo(null);
-//        loginFrame.setTitle("Payday Bank");
-//        loginFrame.setIconImage(appLogo.getImage());
-//        loginFrame.setResizable(false);
-//        loginFrame.setBackground(Color.white);
-//        loginFrame.setUndecorated(true);
-
         //MAIN CONTAINER
         JPanel mainContainer = new JPanel();
         mainContainer.setLayout(new BoxLayout(mainContainer, BoxLayout.Y_AXIS));
@@ -220,10 +212,9 @@ public class LoginPage extends JPanel{
             }
             System.out.println("press");
             if(userValid && passValid){
-                //user.loginAccount(userField.getText(), passField.getText());
+                user.loginAccount(userField.getText(), passField.getText(), onButtonClick);
             }
-
-            new LaunchPage();
+            user.test(onButtonClick);
         });
 
         // loginPanel MOUSE LISTENER
