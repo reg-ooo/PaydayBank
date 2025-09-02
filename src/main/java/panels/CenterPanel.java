@@ -10,7 +10,6 @@ import components.*;
 
 public class CenterPanel extends JPanel {
     Style style = new Style();
-    String[] buttonNames = {"sendMoney.png", "cashIn.png", "cashOut.png", "requestMoney.png", "bankTransfer.png", "buyCrypto.png"};
 
     public final JPanel payBillsWrapper,cashInWrapper, cashOutWrapper, requestMoneyWrapper, bankTransferWrapper, buyCryptoWrapper;
 

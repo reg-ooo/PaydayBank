@@ -1,10 +1,12 @@
 package main;
 
+
 import javax.swing.*;
 import java.awt.*;
 import java.sql.*;
 import pages.SplashScreen;
 import pages.*;
+import panels.*;
 
 public class Payday {
     public static String db,uname,pswd;
@@ -14,13 +16,13 @@ public class Payday {
 
     public static void main(String[] args) {
         //Initalize SplashScreen before launch page
-        SplashScreen splash = new SplashScreen();
-        splash.showSplash(0);
+//        SplashScreen splash = new SplashScreen();
+//        splash.showSplash(0);
 
         //RUNS LAUNCH PAGE AFTER INITIALIZATION
         SwingUtilities.invokeLater(new Runnable() {
             public void run() {
-                new LoginPage();
+                MainFrame mainF = new MainFrame();
             }
         });
 

@@ -5,33 +5,34 @@ import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
+import java.util.function.Consumer;
+
 import components.*;
 import panels.*;
 
-public class LoginPage extends JFrame{
+public class LoginPage extends JPanel{
     Style style = new Style();
-    //Users user = new Users();
-    RoundedFrame loginFrame = new RoundedFrame(30);
-    RoundedFrame registerFrame = new RoundedFrame(30);
+//    RoundedFrame loginFrame = new RoundedFrame(30);
     ImageIcon appLogo = new ImageIcon("appLogo.png");
     boolean userValid = false, passValid = false;
     JLabel loginLabel = new JLabel("Log In");
     JLabel registerLabel = new JLabel("Sign Up");
 
-    public LoginPage() {
+    public LoginPage(Consumer<String> onButtonClick) {
         //LOGIN FRAME
-        loginFrame.setSize(420, 650);
-        loginFrame.setLocationRelativeTo(null);
-        loginFrame.setTitle("Payday Bank");
-        loginFrame.setIconImage(appLogo.getImage());
-        loginFrame.setResizable(false);
-        loginFrame.setBackground(Color.white);
-        loginFrame.setUndecorated(true);
+//        loginFrame.setSize(420, 650);
+//        loginFrame.setLocationRelativeTo(null);
+//        loginFrame.setTitle("Payday Bank");
+//        loginFrame.setIconImage(appLogo.getImage());
+//        loginFrame.setResizable(false);
+//        loginFrame.setBackground(Color.white);
+//        loginFrame.setUndecorated(true);
 
         //MAIN CONTAINER
         JPanel mainContainer = new JPanel();
         mainContainer.setLayout(new BoxLayout(mainContainer, BoxLayout.Y_AXIS));
         mainContainer.setBackground(Color.white);
+        mainContainer.setPreferredSize(new Dimension(420, 650));
 
         // PANEL CREATE
         //N PANEL
@@ -192,8 +193,8 @@ public class LoginPage extends JFrame{
         mainContainer.add(centerPanel);
         mainContainer.add(cLoginPanel);
 
-        loginFrame.add(mainContainer, BorderLayout.CENTER);
 
+        this.add(mainContainer);
         //-------------------------------MOUSE LISTENERS---------------------------------------------
         loginButton.addActionListener(e -> {
             if(userField.getText().isEmpty()){
@@ -217,13 +218,11 @@ public class LoginPage extends JFrame{
             if(passValid){
                 passField.setBorderColor(new Color(234,232,228));
             }
-            loginFrame.repaint();
             System.out.println("press");
             if(userValid && passValid){
                 //user.loginAccount(userField.getText(), passField.getText());
             }
 
-            this.dispose();
             new LaunchPage();
         });
 
@@ -238,10 +237,6 @@ public class LoginPage extends JFrame{
                 registerLabel.setForeground(new Color(178, 177, 177));
                 loginButton.setText("Login");
 
-                loginFrame.remove(cRegisterPanel);
-                loginFrame.add(mainContainer, BorderLayout.CENTER);
-                loginFrame.revalidate();
-                loginFrame.repaint();
             }
         });
 
@@ -256,14 +251,10 @@ public class LoginPage extends JFrame{
                 registerLabel.setForeground(style.dBlue);
                 loginButton.setText("Register");
 
-                loginFrame.remove(cLoginPanel);
-                loginFrame.add(cRegisterPanel, BorderLayout.CENTER);
-                loginFrame.revalidate();
-                loginFrame.repaint();
             }
         });
         //---------------------------------END OF MOUSE LISTENERS--------------------------------------
 
-        loginFrame.setVisible(true);
+        this.setVisible(true);
     }
 }
