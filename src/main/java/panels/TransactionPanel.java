@@ -7,7 +7,7 @@ import components.*;
 public class TransactionPanel extends JPanel {
     Style style = new Style();
 
-    RoundedPanel transactionRoundedPanel = new RoundedPanel(15, style.sBlue);
+    RoundedBorder transactionRoundedPanel = new RoundedBorder(15, style.vBlue, 3);
     JPanel transactionHeaderPanel = createPanel(new Dimension(364, 35), null, new BorderLayout());
     JPanel transactionContentPanel = createPanel(null, null, null); // Removed fixed height
 
@@ -16,7 +16,10 @@ public class TransactionPanel extends JPanel {
 
     public TransactionPanel() {
         this.setOpaque(false);
-        this.setBackground(style.white);
+        this.setBackground(style.sBlue);
+        this.setLayout(new BorderLayout());
+        this.setMaximumSize(new Dimension(360,200));
+        this.setPreferredSize(new Dimension(360,200));
 
         transactionRoundedPanel.setLayout(new BorderLayout());
         transactionRoundedPanel.setBorder(BorderFactory.createEmptyBorder(8, 8, 8, 8));
@@ -25,9 +28,10 @@ public class TransactionPanel extends JPanel {
         seeAllLabel.setCursor(new Cursor(Cursor.HAND_CURSOR));
         transactionHeaderPanel.add(transactionLabel, BorderLayout.WEST);
         transactionHeaderPanel.add(seeAllLabel, BorderLayout.EAST);
+        transactionHeaderPanel.setBackground(style.white);
 
         transactionContentPanel.setLayout(new BoxLayout(transactionContentPanel, BoxLayout.Y_AXIS));
-        transactionContentPanel.setBackground(style.sBlue);
+        transactionContentPanel.setBackground(style.white);
         transactionContentPanel.setOpaque(false);
 
         transactionContentPanel.add(createDateSection("Today"));
@@ -38,21 +42,22 @@ public class TransactionPanel extends JPanel {
         transactionRoundedPanel.add(transactionHeaderPanel, BorderLayout.NORTH);
         transactionRoundedPanel.add(transactionContentPanel, BorderLayout.CENTER);
 
-        RoundedBorder transactionContainer = new RoundedBorder(15, style.vBlue, 2);
-        transactionContainer.setLayout(new FlowLayout());
+        RoundedBorder transactionContainer = new RoundedBorder(15, style.vBlue, 3);
+        transactionContainer.setLayout(new BorderLayout());
         transactionContainer.setOpaque(false);
-        transactionContainer.setMaximumSize(new Dimension(390, 300)); // Increased height to accommodate more content
-        transactionContainer.setPreferredSize(new Dimension(390, 300));
+        transactionContainer.setPreferredSize(new Dimension(360, 200));
         transactionContainer.add(transactionRoundedPanel);
+        transactionContainer.setBackground(style.white);
 
         this.add(transactionContainer, BorderLayout.CENTER);
     }
 
     private JPanel createTransactionItem(String time, String description, String amount, boolean isPositive) {
-        JPanel transactionPanel = createPanel(null, new Color(230, 240, 250), new BorderLayout());
+        JPanel transactionPanel = createPanel(null, style.white, new BorderLayout());
         transactionPanel.setBorder(BorderFactory.createEmptyBorder(5, 10, 5, 10));
+        transactionPanel.setPreferredSize(new Dimension(370, 30));
 
-        JPanel leftPanel = createPanel(null, new Color(230, 240, 250), null);
+        JPanel leftPanel = createPanel(null, style.white, null);
         leftPanel.setLayout(new BoxLayout(leftPanel, BoxLayout.Y_AXIS));
 
         JLabel descLabel = new JLabel(description);
@@ -93,8 +98,10 @@ public class TransactionPanel extends JPanel {
     }
 
     private JPanel createDateSection(String date) {
-        JPanel datePanel = createPanel(null, new Color(230, 240, 250), new BorderLayout());
+        JPanel datePanel = createPanel(null, style.white, new BorderLayout());
         datePanel.setBorder(BorderFactory.createEmptyBorder(15, 10, 5, 10));
+        datePanel.setMaximumSize(new Dimension(370, 30));
+        datePanel.setPreferredSize(new Dimension(370, 33));
 
         JLabel dateLabel = createLabel(date, style.loadFont(Font.BOLD, 16f, "Quicksand-Bold"), style.dBlue);
         datePanel.add(dateLabel, BorderLayout.WEST);

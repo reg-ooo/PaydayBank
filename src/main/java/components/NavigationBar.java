@@ -15,6 +15,7 @@ public class NavigationBar extends JPanel{
 
     public NavigationBar() {
         this.setOpaque(false);
+        this.setLayout(new BorderLayout());
 
         navBarPanel.setLayout(new GridLayout(1,3));
         navBarPanel.setForeground(style.dBlue);

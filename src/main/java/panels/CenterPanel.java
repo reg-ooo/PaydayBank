@@ -13,7 +13,7 @@ public class CenterPanel extends JPanel {
 
     public final JPanel payBillsWrapper,cashInWrapper, cashOutWrapper, requestMoneyWrapper, bankTransferWrapper, buyCryptoWrapper;
 
-    JPanel centerPanel = createPanel(new Dimension(420, 200), null, new FlowLayout(FlowLayout.CENTER, 0, 15));
+    JPanel centerPanel = createPanel(new Dimension(420, 220), null, new FlowLayout(FlowLayout.CENTER, 0, 15));
 
     ArrayList<RoundedBorder> buttons = new ArrayList<>();
 
