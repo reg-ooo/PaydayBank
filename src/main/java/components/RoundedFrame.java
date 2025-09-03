@@ -1,18 +1,17 @@
+package components;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.geom.RoundRectangle2D;
 
-public class RoundedPanel extends JPanel {
+public class RoundedFrame extends JFrame {
     private int cornerRadius;
     private Color backgroundColor;
     private Dimension preferredSize;
 
-    public RoundedPanel(int cornerRadius, Color backgroundColor) {
+    public RoundedFrame(int cornerRadius) {
         this.cornerRadius = cornerRadius;
-        this.backgroundColor = backgroundColor;
-        setOpaque(false);
-        super.setBackground(backgroundColor);
-        this.preferredSize = new Dimension(420, 750);
+        this.preferredSize = new Dimension(420, 650);
     }
 
     @Override
@@ -29,13 +28,8 @@ public class RoundedPanel extends JPanel {
     }
 
     @Override
-    public Dimension getPreferredSize() {
-        return preferredSize;
-    }
-
-    @Override
-    protected void paintComponent(Graphics g) {
-        super.paintComponent(g);
+    public void paint(Graphics g) {
+        super.paint(g);
         Graphics2D g2d = (Graphics2D) g.create();
 
         // Enable antialiasing for smooth edges
@@ -46,9 +40,8 @@ public class RoundedPanel extends JPanel {
                 0, 0, getWidth(), getHeight(), cornerRadius, cornerRadius
         );
 
-        // Fill the rounded rectangle
-        g2d.setColor(backgroundColor);
-        g2d.fill(roundedRect);
+        //SET SHAPE
+        setShape(roundedRect);
 
         g2d.dispose();
     }

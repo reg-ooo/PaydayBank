@@ -1,0 +1,112 @@
+package components;
+
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.MouseEvent;
+import java.awt.geom.*;
+import java.io.*;
+import java.util.ArrayList;
+import panels.*;
+
+public class NavigationBar extends JPanel{
+    Style style = new Style();
+
+    GradientPanel navBarPanel =  new GradientPanel(style.dvBlue, style.vBlue, 15);
+
+    public NavigationBar() {
+        this.setOpaque(false);
+        this.setLayout(new BorderLayout());
+
+        navBarPanel.setLayout(new GridLayout(1,3));
+        navBarPanel.setForeground(style.dBlue);
+
+        navBarPanel.setForeground(style.dBlue);
+
+        // Create navigation buttons
+        JPanel homeBtn = createNavButton("🏠", "Home", true, false);
+        JPanel logoBtn =  createNavButton("❌", "Exit", false, true);
+        JPanel profileBtn = createNavButton("👤", "Profile", false, false);
+
+        //ADD BUTTONS TO NAV BAR
+        navBarPanel.add(homeBtn);
+        navBarPanel.add(logoBtn);
+        navBarPanel.add(profileBtn);
+
+        this.add(navBarPanel, BorderLayout.CENTER);
+    }
+
+    private JPanel createNavButton(String icon, String text, boolean isActive, boolean exit) {
+        JPanel navButton = new JPanel(new FlowLayout());
+        navButton.setLayout(new BoxLayout(navButton, BoxLayout.Y_AXIS));
+        navButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        navButton.setBorder(BorderFactory.createEmptyBorder(0, 10, 0, 10));
+        navButton.setPreferredSize(new Dimension(80, 60)); // Fixed height
+        navButton.setOpaque(false);
+
+
+        JLabel iconLabel = createLabel(icon, new Font("Segoe UI Emoji", Font.PLAIN, 30), null);
+        iconLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+
+        iconLabel.setForeground(isActive ? Color.WHITE : new Color(150, 150, 150));
+
+        JLabel textLabel = new JLabel(text);
+        textLabel.setFont(style.loadFont(Font.PLAIN, 10f, "Quicksand-Regular"));
+        textLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        textLabel.setForeground(isActive ? Color.WHITE : new Color(150, 150, 150));
+
+        // Add some spacing between icon and text
+        navButton.add(Box.createVerticalGlue());
+        navButton.add(iconLabel);
+        navButton.add(Box.createRigidArea(new Dimension(0, 2)));
+        navButton.add(textLabel);
+
+        // Add hover effect
+        navButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                if (!isActive) {
+                    iconLabel.setForeground(Color.WHITE);
+                    textLabel.setForeground(Color.WHITE);
+
+                    navBarPanel.setGradientColors(style.vBlue, style.dvBlue);
+                }
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                if (!isActive) {
+                    iconLabel.setForeground(new Color(150, 150, 150));
+                    textLabel.setForeground(new Color(150, 150, 150));
+
+                    navBarPanel.setGradientColors(style.dvBlue, style.vBlue);
+                }
+            }
+
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                if (exit) {
+                    System.exit(0);
+                } else {
+                    JOptionPane.showMessageDialog(navBarPanel, "Nav Button Pressed!");
+                }
+            }
+        });
+        return navButton;
+
+
+    }
+
+    private JPanel createPanel(Dimension dim, Color color, LayoutManager layout){
+        JPanel panel = new JPanel();
+        panel.setPreferredSize(dim);
+        panel.setBackground(color);
+        panel.setLayout(layout);
+
+        return panel;
+    }
+
+    private JLabel createLabel(String text, Font font, Color color){
+        JLabel label = new JLabel(text);
+        label.setFont(font);
+        label.setForeground(color);
+
+        return label;
+    }
+}

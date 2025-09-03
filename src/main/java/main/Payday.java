@@ -1,21 +1,28 @@
+package main;
+
+
 import javax.swing.*;
+import java.awt.*;
 import java.sql.*;
+import pages.SplashScreen;
+import pages.*;
+import panels.*;
 
 public class Payday {
-    static String db,uname,pswd;
-    static Connection con;
-    static Statement st;
-    static ResultSet rs;
+    public static String db,uname,pswd;
+    public static Connection con;
+    public static Statement st;
+    public static ResultSet rs;
 
     public static void main(String[] args) {
         //Initalize SplashScreen before launch page
-        SplashScreen splash = new SplashScreen();
-        splash.showSplash(3);
+//        SplashScreen splash = new SplashScreen();
+//        splash.showSplash(0);
 
         //RUNS LAUNCH PAGE AFTER INITIALIZATION
         SwingUtilities.invokeLater(new Runnable() {
             public void run() {
-                new LoginPage();
+                MainFrame mainF = new MainFrame();
             }
         });
 
@@ -41,4 +48,5 @@ public class Payday {
             System.out.println("Failed to connect to database: " + e.getMessage());
         }
     }
+
 }
