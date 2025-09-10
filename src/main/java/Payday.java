@@ -25,7 +25,7 @@ public class Payday {
     public static void DBConnect(){
         db = "banksystem";
         uname = "admin";
-        pswd = "]#KCzK9[MeePV8<6YN~o2YOj48dT";
+        pswd = ":mnSI2rmCv7:Buh7cXG>20Fap#F$";
 
         try{
             Class.forName("com.mysql.cj.jdbc.Driver");
