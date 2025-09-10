@@ -13,6 +13,7 @@ public class Payday {
     public static Connection con;
     public static Statement st;
     public static ResultSet rs;
+    static boolean connected;
 
     public static void main(String[] args) {
         //Initalize SplashScreen before launch page
@@ -22,17 +23,21 @@ public class Payday {
         //RUNS LAUNCH PAGE AFTER INITIALIZATION
         SwingUtilities.invokeLater(new Runnable() {
             public void run() {
-                MainFrame mainF = new MainFrame();
+
+                DBConnect();
+                if(connected) {
+                    MainFrame mainF = new MainFrame();
+                }
             }
         });
 
-        DBConnect();
+
     }
     
     public static void DBConnect(){
         db = "banksystem";
         uname = "admin";
-        pswd = "]#KCzK9[MeePV8<6YN~o2YOj48dT";
+        pswd = "H04q8vW).TS-A~|(#Y:W!nM$hQPe";
 
         try{
             Class.forName("com.mysql.cj.jdbc.Driver");
@@ -44,9 +49,12 @@ public class Payday {
 
         } catch (ClassNotFoundException e) {
             System.out.println("MySQL JDBC Driver not found: " + e.getMessage());
+            return;
         } catch (SQLException e) {
             System.out.println("Failed to connect to database: " + e.getMessage());
+            return;
         }
+        connected = true;
     }
 
 }

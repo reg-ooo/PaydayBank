@@ -5,6 +5,7 @@ import components.RoundedFrame;
 import javax.swing.*;
 import java.awt.*;
 import pages.*;
+import pages.SplashScreen;
 import panels.*;
 
 public class MainFrame extends JFrame {
