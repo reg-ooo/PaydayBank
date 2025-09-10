@@ -9,17 +9,17 @@ import components.*;
 
 
 public class CenterPanel extends JPanel {
-    Style style = new Style();
+    public Style style = new Style();
 
     public final JPanel payBillsWrapper,cashInWrapper, cashOutWrapper, requestMoneyWrapper, bankTransferWrapper, buyCryptoWrapper;
 
-    JPanel centerPanel = createPanel(new Dimension(420, 220), null, new FlowLayout(FlowLayout.CENTER, 0, 15));
+    public JPanel centerPanel = createPanel(new Dimension(420, 220), null, new FlowLayout(FlowLayout.CENTER, 0, 15));
 
-    ArrayList<RoundedBorder> buttons = new ArrayList<>();
+    public ArrayList<RoundedBorder> buttons = new ArrayList<>();
 
     public CenterPanel() {
         //CENTER PANEL
-        this.setOpaque(false);
+        this.setOpaque(true);
         this.setBackground(style.white);
 
         centerPanel.setMaximumSize(new Dimension(420, 230));

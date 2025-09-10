@@ -8,18 +8,18 @@ import main.Payday;
 
 public class TransactionPanel extends JPanel{
     Transaction trans;
-    Style style = new Style();
+    public Style style = new Style();
     Payday db = new Payday();
 
-    RoundedPanel transactionRoundedPanel = new RoundedPanel(15, style.sBlue);
+    public RoundedPanel transactionRoundedPanel = new RoundedPanel(15, style.sBlue);
     JPanel transactionHeaderPanel = createPanel(new Dimension(364, 35), null, new BorderLayout());
     JPanel transactionContentPanel = createPanel(new Dimension(364, 240), null, null);
 
-    JLabel transactionLabel = createLabel("Transaction History", style.loadFont(Font.BOLD, 20f, "Quicksand-Regular"), style.dBlue);
-    JLabel seeAllLabel = createLabel("See all", style.loadFont(Font.PLAIN, 14f, "Quicksand-Regular"), style.pBlue);
+    public JLabel transactionLabel = createLabel("Transaction History", style.loadFont(Font.BOLD, 20f, "Quicksand-Regular"), style.dBlue);
+    public JLabel seeAllLabel = createLabel("See all", style.loadFont(Font.PLAIN, 14f, "Quicksand-Regular"), style.pBlue);
 
     public TransactionPanel() {
-        this.setOpaque(false);
+        this.setOpaque(true);
         this.setBackground(style.white);
 
         // TRANSACTION HEADER PANEL (with "Transaction History" and "See all")
@@ -65,11 +65,10 @@ public class TransactionPanel extends JPanel{
 
     // Add this method to create transaction history items
     private JPanel createTransactionItem(String time, String description, String amount, boolean isPositive) {
-        JPanel transactionPanel = createPanel(null, new Color(230, 240, 250), new BorderLayout());
+        JPanel transactionPanel = createPanel(null, null, new BorderLayout()); // no hardcoded bg
         transactionPanel.setBorder(BorderFactory.createEmptyBorder(5, 10, 5, 10));
 
-        // Left side: Time and description
-        JPanel leftPanel = createPanel(null, new Color(230, 240, 250), null);
+        JPanel leftPanel = createPanel(null, null, null); // no bg here either
         leftPanel.setLayout(new BoxLayout(leftPanel, BoxLayout.Y_AXIS));
 
         JLabel descLabel = new JLabel(description);
@@ -83,16 +82,59 @@ public class TransactionPanel extends JPanel{
         leftPanel.add(descLabel);
         leftPanel.add(timeLabel);
 
-        // Right side: Amount
         JLabel amountLabel = new JLabel(amount);
         amountLabel.setFont(style.loadFont(Font.BOLD, 16f, "Quicksand-Regular"));
-        amountLabel.setForeground(isPositive ? new Color(0, 128, 0) : Color.RED); // Green for positive, red for negative
+        amountLabel.setForeground(isPositive ? new Color(0, 128, 0) : Color.RED);
         amountLabel.setHorizontalAlignment(SwingConstants.RIGHT);
 
         transactionPanel.add(leftPanel, BorderLayout.WEST);
         transactionPanel.add(amountLabel, BorderLayout.EAST);
 
         return transactionPanel;
+    }
+
+    public void applyTheme(boolean isDarkMode) {
+        // Background of the whole panel
+        this.setBackground(isDarkMode ? Color.BLACK : style.white);
+
+        // Card backgrounds
+        Color lightCard = new Color(230, 240, 250);   // sky blue
+        Color darkCard  = new Color(45, 55, 72);      // dark slate blue
+        transactionRoundedPanel.setBackground(isDarkMode ? darkCard : lightCard);
+
+        // Header labels
+        transactionLabel.setForeground(isDarkMode ? Color.WHITE : style.dBlue);
+        seeAllLabel.setForeground(isDarkMode ? new Color(150, 180, 250) : style.pBlue);
+
+        // Update children inside content panel
+        for (Component comp : transactionContentPanel.getComponents()) {
+            if (comp instanceof JPanel panel) {
+                panel.setBackground(isDarkMode ? darkCard : lightCard);
+
+                for (Component sub : panel.getComponents()) {
+                    if (sub instanceof JLabel lbl) {
+                        String text = lbl.getText();
+
+                        // Date labels
+                        if (text.matches("\\d{4}-\\d{2}-\\d{2}")) {
+                            lbl.setForeground(isDarkMode ? new Color(180, 200, 250) : style.dBlue);
+                        }
+                        // Time labels
+                        else if (lbl.getForeground().equals(Color.GRAY)) {
+                            lbl.setForeground(isDarkMode ? new Color(200, 200, 200) : Color.GRAY);
+                        }
+                        // Description labels
+                        else if (lbl.getForeground().equals(Color.BLACK)) {
+                            lbl.setForeground(isDarkMode ? Color.WHITE : Color.BLACK);
+                        }
+                        // Amount stays green/red, no change
+                    }
+                }
+            }
+        }
+
+        revalidate();
+        repaint();
     }
 
     private JPanel createPanel(Dimension dim, Color color, LayoutManager layout){

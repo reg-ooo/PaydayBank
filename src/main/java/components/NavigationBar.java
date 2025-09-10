@@ -16,6 +16,7 @@ public class NavigationBar extends JPanel{
     public NavigationBar() {
         this.setOpaque(false);
         this.setLayout(new BorderLayout());
+        navBarPanel.setOpaque(false);
 
         navBarPanel.setLayout(new GridLayout(1,3));
         navBarPanel.setForeground(style.dBlue);
@@ -91,15 +92,6 @@ public class NavigationBar extends JPanel{
         return navButton;
 
 
-    }
-
-    private JPanel createPanel(Dimension dim, Color color, LayoutManager layout){
-        JPanel panel = new JPanel();
-        panel.setPreferredSize(dim);
-        panel.setBackground(color);
-        panel.setLayout(layout);
-
-        return panel;
     }
 
     private JLabel createLabel(String text, Font font, Color color){

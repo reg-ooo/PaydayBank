@@ -13,14 +13,15 @@ public class LaunchPage extends JPanel {
     private CenterPanel centerPanel = new CenterPanel();
 
     public LaunchPage() {
+        this.setOpaque(true);
         setLayout(new BorderLayout());
         setBackground(Color.WHITE);
 
-        JPanel mainContentPanel = new JPanel(new BorderLayout());
+        JPanel mainContentPanel = new JPanel();
         mainContentPanel.setLayout(new BoxLayout(mainContentPanel, BoxLayout.Y_AXIS));
         mainContentPanel.add(centerPanel, "main");
         mainContentPanel.add(tPanel, "transaction");
-        mainContentPanel.setBackground(Color.WHITE);
+        mainContentPanel.setOpaque(false);
 
         add(nPanel, BorderLayout.NORTH);
         add(mainContentPanel, BorderLayout.CENTER);
