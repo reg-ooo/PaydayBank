@@ -30,8 +30,6 @@ public class Payday {
                 }
             }
         });
-
-
     }
     
     public static void DBConnect(){
@@ -56,5 +54,4 @@ public class Payday {
         }
         connected = true;
     }
-
 }

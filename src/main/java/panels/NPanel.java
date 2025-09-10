@@ -3,9 +3,10 @@ package panels;
 import javax.swing.*;
 import java.awt.*;
 import components.*;
+import main.Payday;
 
 public class NPanel extends JPanel {
-
+    Payday db = new Payday();
     //STYLE
     Style style = new Style();
 
@@ -20,7 +21,7 @@ public class NPanel extends JPanel {
 
     //LABELS
     JLabel balanceText = createLabel("Available Balance: ", style.loadFont(Font.BOLD, 18f, "Quicksand-Regular"), style.white);
-    JLabel amountText = createLabel(String.format( "%s 15,000", style.pesoSymbol), style.loadFont(Font.PLAIN, 40f, "Quicksand-Regular"), style.white);
+    JLabel amountText = createLabel(String.format( "%s %.2f", style.pesoSymbol, getBalance()), style.loadFont(Font.PLAIN, 40f, "Quicksand-Regular"), style.white);
 
     public NPanel() {
         this.setLayout(new BorderLayout());
@@ -64,5 +65,21 @@ public class NPanel extends JPanel {
         label.setForeground(color);
 
         return label;
+    }
+
+    private double getBalance(){
+        double balance = 0;
+
+        String query = "select balance from  Wallets where userID = 1;";
+
+        try{
+            db.rs = db.st.executeQuery(query);
+            db.rs.next();
+            balance = db.rs.getDouble("balance");
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+        return balance;
     }
 }
