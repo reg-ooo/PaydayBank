@@ -2,38 +2,42 @@ package panels;
 
 import javax.swing.*;
 import java.awt.*;
-import components.*;
+
+import Factory.LabelFactory;
+import Factory.PanelFactory;
 import main.Payday;
+import util.FontLoader;
+import util.ImageLoader;
+import util.ThemeManager;
+
 import javax.swing.border.EmptyBorder;
 
 public class NPanel extends JPanel {
     Payday db = new Payday();
-    //STYLE
-    Style style = new Style();
+
 
     ThemeManager themeManager = ThemeManager.getInstance();
 
     //BUTTON
-    ImageIcon icon = resizeImage("darkModeOn.png", 50, 50);
+    ImageIcon icon = ImageLoader.getInstance().getImage("darkModeOn");
     JButton balanceButton = new JButton(icon);
 
 
     //UPPER PANELS
-    JPanel containerPanel = createPanel(new Dimension(360, 150), null, new FlowLayout());
-    JPanel headerPanel = createPanel(new Dimension(420, 15), null, null);
-    JPanel upperBalancePanel = createPanel(new Dimension(360, 45), null, new FlowLayout(FlowLayout.LEFT, 15, 10));
-    JPanel amountPanel = createPanel(new Dimension(420, 200), null, new FlowLayout(FlowLayout.LEFT, 15, 0));
+    JPanel containerPanel = PanelFactory.getInstance().createPanel(new Dimension(360, 150), null, new FlowLayout());
+    JPanel headerPanel = PanelFactory.getInstance().createPanel(new Dimension(420, 15), null, null);
+    JPanel upperBalancePanel = PanelFactory.getInstance().createPanel(new Dimension(360, 45), null, new FlowLayout(FlowLayout.LEFT, 15, 10));
+    JPanel amountPanel = PanelFactory.getInstance().createPanel(new Dimension(420, 200), null, new FlowLayout(FlowLayout.LEFT, 15, 0));
 
-    GradientPanel balPanel = new GradientPanel(style.dvBlue, style.vBlue, 15);
-
+    GradientPanel balPanel = new GradientPanel(ThemeManager.getInstance().getDvBlue(), ThemeManager.getInstance().getVBlue(), 15);
 
     //LABELS
-    JLabel balanceText = createLabel("Available Balance: ", style.loadFont(Font.BOLD, 18f, "Quicksand-Regular"), style.white);
-    JLabel amountText = createLabel(String.format( "%s %.2f", style.pesoSymbol, getBalance()), style.loadFont(Font.PLAIN, 40f, "Quicksand-Regular"), style.white);
+    JLabel balanceText = LabelFactory.getInstance().createLabel("Available Balance: ", FontLoader.getInstance().loadFont(Font.BOLD, 18f, "Quicksand-Regular"), ThemeManager.getInstance().getWhite());
+    JLabel amountText = LabelFactory.getInstance().createLabel(String.format( "%s %.2f", "\u20B1", getBalance()), FontLoader.getInstance().loadFont(Font.PLAIN, 40f, "Quicksand-Regular"), ThemeManager.getInstance().getWhite());
 
     public NPanel() {
         this.setLayout(new BorderLayout());
-        this.setBackground(style.white);
+        this.setBackground(ThemeManager.getInstance().getWhite());
         this.setOpaque(false);
 
         balPanel.setLayout(new BorderLayout());
@@ -46,9 +50,7 @@ public class NPanel extends JPanel {
         balanceText.setHorizontalTextPosition(JLabel.LEFT);
         amountText.setVerticalTextPosition(JLabel.CENTER);
 
-        balanceText.setBorder(new EmptyBorder(0, 10, 0, 0));  // top, left, bottom, right
-
-// Add some top padding to the button
+        balanceText.setBorder(new EmptyBorder(0, 10, 0, 0));
 
         balPanel.add(amountPanel);
         balPanel.add(upperBalancePanel, BorderLayout.NORTH);
@@ -82,11 +84,11 @@ public class NPanel extends JPanel {
             themeManager.applyTheme(SwingUtilities.getWindowAncestor(this));
 
             if (themeManager.isDarkMode()) {
-                balanceButton.setIcon(resizeImage("darkModeOff.png", 50, 50)); // sun bigger
-                this.setBackground(style.black);
+                balanceButton.setIcon(ImageLoader.getInstance().getImage("darkModeOff")); // sun bigger
+                this.setBackground(ThemeManager.getInstance().getBlack());
             } else {
-                balanceButton.setIcon(resizeImage("darkModeOn.png", 50, 50));  // moon bigger
-                this.setBackground(style.white);
+                balanceButton.setIcon(ImageLoader.getInstance().getImage("darkModeOn"));  // moon bigger
+                this.setBackground(ThemeManager.getInstance().getWhite());
             }
 
             themeManager.applyTheme(this);
@@ -100,50 +102,23 @@ public class NPanel extends JPanel {
             @Override
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 if (themeManager.isDarkMode()) {
-                    balanceButton.setIcon(resizeImage("darkModeOff.png", 55, 55)); // sun bigger
+                    balanceButton.setIcon(ImageLoader.getInstance().getImage("bigDarkModeOff")); // sun bigger
                 } else {
-                    balanceButton.setIcon(resizeImage("darkModeOn.png", 55, 55));  // moon bigger
+                    balanceButton.setIcon(ImageLoader.getInstance().getImage("bigDarkModeOn"));  // moon bigger
                 }
             }
 
             @Override
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 if (themeManager.isDarkMode()) {
-                    balanceButton.setIcon(resizeImage("darkModeOff.png", 50, 50)); // sun normal
+                    balanceButton.setIcon(ImageLoader.getInstance().getImage("darkModeOff")); // sun normal
                 } else {
-                    balanceButton.setIcon(resizeImage("darkModeOn.png", 50, 50));  // moon normal
+                    balanceButton.setIcon(ImageLoader.getInstance().getImage("darkModeOn"));  // moon normal
                 }
             }
         });
     }
 
-    private ImageIcon resizeImage(String text, int width, int height) {
-        //RESIZE IMAGE
-
-        ImageIcon rawImage = new ImageIcon(text);
-        Image originalImage = rawImage.getImage();
-        Image resizedimage = originalImage.getScaledInstance(width, height, Image.SCALE_SMOOTH);
-        ImageIcon buttonImage = new ImageIcon(resizedimage);
-
-        return buttonImage;
-    }
-
-    private JPanel createPanel(Dimension dim, Color color, LayoutManager layout){
-        JPanel panel = new JPanel();
-        panel.setPreferredSize(dim);
-        panel.setBackground(color);
-        panel.setLayout(layout);
-
-        return panel;
-    }
-
-    private JLabel createLabel(String text, Font font, Color color){
-        JLabel label = new JLabel(text);
-        label.setFont(font);
-        label.setForeground(color);
-
-        return label;
-    }
 
     private double getBalance(){
         double balance = 0;

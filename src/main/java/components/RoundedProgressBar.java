@@ -1,5 +1,8 @@
 package components;
 
+
+import util.ThemeManager;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.geom.RoundRectangle2D;
@@ -8,12 +11,12 @@ public class RoundedProgressBar extends JComponent{
     private int progress = 0;
     private int minimum = 0;
     private int maximum = 100;
-    private Style style = new Style();
-    private Color foregroundColor = style.dBlue;
-    private Color backgroundColor = style.gray;
+
+    private Color foregroundColor = ThemeManager.getInstance().getDBlue();
+    private Color backgroundColor = ThemeManager.getInstance().getGray();
     private int cornerRadius;
     private String text = "";
-    private Color textColor = style.white;
+    private Color textColor = ThemeManager.getInstance().getWhite();
 
     public RoundedProgressBar(int cornerRadius, int width, int height){
         this.cornerRadius = cornerRadius;

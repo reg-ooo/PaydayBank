@@ -5,7 +5,7 @@ import components.RoundedFrame;
 import javax.swing.*;
 import java.awt.*;
 import pages.*;
-import pages.SplashScreen;
+//import pages.SplashScreen;
 import panels.*;
 
 public class MainFrame extends JFrame {
@@ -35,7 +35,7 @@ public class MainFrame extends JFrame {
         cardLayout = new CardLayout();
         mainPanel = new JPanel(cardLayout);
 
-        mainPanel.add(new LoginPage(this::changeCard), "Login");
+//        mainPanel.add(new LoginPage(this::changeCard), "Login");
         mainPanel.add(new LaunchPage(), "Launch");
         mainFrame.setContentPane(mainPanel);
     }

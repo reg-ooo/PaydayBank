@@ -3,15 +3,15 @@ package components;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseEvent;
-import java.awt.geom.*;
-import java.io.*;
-import java.util.ArrayList;
+
 import panels.*;
+import util.FontLoader;
+import util.ThemeManager;
 
 public class NavigationBar extends JPanel{
-    Style style = new Style();
 
-    GradientPanel navBarPanel =  new GradientPanel(style.dvBlue, style.vBlue, 15);
+
+    public GradientPanel navBarPanel =  new GradientPanel(ThemeManager.getInstance().getDvBlue(), ThemeManager.getInstance().getVBlue(), 15);
 
     public NavigationBar() {
         this.setOpaque(false);
@@ -19,9 +19,9 @@ public class NavigationBar extends JPanel{
         navBarPanel.setOpaque(false);
 
         navBarPanel.setLayout(new GridLayout(1,3));
-        navBarPanel.setForeground(style.dBlue);
+        navBarPanel.setForeground(ThemeManager.getInstance().getDBlue());
 
-        navBarPanel.setForeground(style.dBlue);
+        navBarPanel.setForeground(ThemeManager.getInstance().getDBlue());
 
         // Create navigation buttons
         JPanel homeBtn = createNavButton("🏠", "Home", true, false);
@@ -51,7 +51,7 @@ public class NavigationBar extends JPanel{
         iconLabel.setForeground(isActive ? Color.WHITE : new Color(150, 150, 150));
 
         JLabel textLabel = new JLabel(text);
-        textLabel.setFont(style.loadFont(Font.PLAIN, 10f, "Quicksand-Regular"));
+        textLabel.setFont(FontLoader.getInstance().loadFont(Font.PLAIN, 10f, "Quicksand-Regular"));
         textLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
         textLabel.setForeground(isActive ? Color.WHITE : new Color(150, 150, 150));
 
@@ -68,7 +68,7 @@ public class NavigationBar extends JPanel{
                     iconLabel.setForeground(Color.WHITE);
                     textLabel.setForeground(Color.WHITE);
 
-                    navBarPanel.setGradientColors(style.vBlue, style.dvBlue);
+                    navBarPanel.setGradientColors(ThemeManager.getInstance().getVBlue(), ThemeManager.getInstance().getDvBlue());
                 }
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
@@ -76,7 +76,7 @@ public class NavigationBar extends JPanel{
                     iconLabel.setForeground(new Color(150, 150, 150));
                     textLabel.setForeground(new Color(150, 150, 150));
 
-                    navBarPanel.setGradientColors(style.dvBlue, style.vBlue);
+                    navBarPanel.setGradientColors(ThemeManager.getInstance().getDvBlue(), ThemeManager.getInstance().getVBlue());
                 }
             }
 

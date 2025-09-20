@@ -4,16 +4,20 @@ package main;
 import javax.swing.*;
 import java.awt.*;
 import java.sql.*;
-import pages.SplashScreen;
+
+import data.Database;
+//import pages.SplashScreen;
 import pages.*;
 import panels.*;
+
+import static data.Database.DBConnect;
 
 public class Payday {
     public static String db,uname,pswd;
     public static Connection con;
     public static Statement st;
     public static ResultSet rs;
-    static boolean connected;
+    public static boolean connected;
 
     public static void main(String[] args) {
         //Initalize SplashScreen before launch page
@@ -24,7 +28,7 @@ public class Payday {
         SwingUtilities.invokeLater(new Runnable() {
             public void run() {
 
-                DBConnect();
+                Database.getInstance().DBConnect();
                 if(connected) {
                     MainFrame mainF = new MainFrame();
                 }
@@ -32,26 +36,5 @@ public class Payday {
         });
     }
     
-    public static void DBConnect(){
-        db = "banksystem";
-        uname = "admin";
-        pswd = "H04q8vW).TS-A~|(#Y:W!nM$hQPe";
 
-        try{
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            String url = "jdbc:mysql://paydaybank.cluster-chqoc26c4kyy.ap-southeast-1.rds.amazonaws.com:3306/" + db + "?serverTimezone=UTC";
-            con = DriverManager.getConnection(url, uname, pswd);
-            st = con.createStatement();
-
-            System.out.println("Connected to MySQL database successfully!");
-
-        } catch (ClassNotFoundException e) {
-            System.out.println("MySQL JDBC Driver not found: " + e.getMessage());
-            return;
-        } catch (SQLException e) {
-            System.out.println("Failed to connect to database: " + e.getMessage());
-            return;
-        }
-        connected = true;
-    }
 }

@@ -28,3 +28,4 @@ public class LaunchPage extends JPanel {
         add(navBarPanel, BorderLayout.SOUTH);
     }
 }
+

@@ -1,5 +1,7 @@
 package panels;
 
+import util.ThemeManager;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.geom.Point2D;
@@ -12,8 +14,8 @@ public class GradientPanel extends JPanel {
 
     public GradientPanel() {
         // Default blue gradient colors
-        this.startColor = new Color(0, 120, 215);  // Deep blue
-        this.endColor = new Color(100, 180, 255);  // Light blue
+        this.startColor = ThemeManager.getInstance().getDeepBlue();  // Deep blue
+        this.endColor = ThemeManager.getInstance().getGradientLBlue();  // Light blue
     }
 
     public GradientPanel(Color startColor, Color endColor, int cornerRadius) {
